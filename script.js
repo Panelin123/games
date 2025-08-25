@@ -47,12 +47,25 @@ const palavras = [
     mostrarPalavra();
     verificarFim();
   }
+
+  const imagensErros = [
+    "peito.png",
+    "braço 2.png",
+    "braço 1.png",
+    "perna 1.png",
+    "perna 2.png",
+    "cabecinha.png",
+  ];
   
   function atualizarImagem() {
     imagemDiv.innerHTML = "";
-    for (let i = 1; i <= erros; i++) {
+  
+    if (erros > 0 && erros <= maxErros) {
       const img = document.createElement("img");
-      img.src = `imagens/${i}.png`;
+  
+      // pega o nome da imagem do array, com o índice correto
+      img.src = `imagens/${imagensErros[erros - 1]}`;
+      img.alt = `Erro ${erros}`;
       imagemDiv.appendChild(img);
     }
   }
