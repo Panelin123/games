@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Jogo da Forca</title>
+  <link rel="stylesheet" href="forca.css">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <div class="forca-container">
+    <h1>Jogo da Forca</h1>
+    <div id="palavra-secreta">_ _ _ _</div>
+
+    <div id="letras-digitadas"></div>
+
+    <input type="text" id="letra" maxlength="1" autofocus placeholder="Digite uma letra" />
+    <button onclick="verificarLetra()">Tentar</button>
+
+    <div id="imagem-forca">
+   
+    </div>
+
+    <div id="mensagem-final"></div>
+    <button onclick="reiniciarJogo()">Reiniciar</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
