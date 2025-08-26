@@ -17,10 +17,13 @@
     <input type="text" id="letra" maxlength="1" autofocus placeholder="Digite uma letra" />
     <button onclick="verificarLetra()">Tentar</button>
 
-    <!-- Removendo as imagens estáticas e deixando apenas o container vazio -->
-    <div id="imagem-forca" style="position: relative; height: 150px; width: 150px; margin: 20px auto;">
-      <!-- As imagens serão adicionadas dinamicamente pelo JavaScript -->
+ 
+    <div id="tentativas-restantes" style="text-align: center; margin: 20px auto; font-size: 18px; color: #ff4444;">
+      <strong>Tentativas restantes: <span id="contador">6</span></strong>
     </div>
+
+
+    <div id="imagem-forca" style="position: relative; height: 150px; width: 150px; margin: 20px auto;"></div>
 
     <div id="mensagem-final"></div>
     <button onclick="reiniciarJogo()">Reiniciar</button>
