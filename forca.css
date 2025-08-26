@@ -1,70 +1,94 @@
-body{
-    background-color: #1a0033;
-box-shadow: 0 0 20px #cc66ff;
-color: #cc66ff;
+body {
+  background-color: #1a0033;
+  box-shadow: 0 0 20px #cc66ff;
+  color: #cc66ff;
 }
 
-
 .forca-container {
-    background-color: #111; /* fundo escuro */
-    color: #00ffcc; /* verde neon */
-    padding: 30px;
-    max-width: 600px;
-    margin: 50px auto;
-    text-align: center;
-    border-radius: 15px;
-    font-family: 'Press Start 2P', monospace;
-    box-shadow: 0 0 20px #00ffcc;
-  }
-  
-  #palavra-secreta {
-    font-size: 1.2em;
-    letter-spacing: 12px;
-    margin: 20px 0;
-  }
-  
-  #letra {
-    font-family: 'Press Start 2P', monospace;
-    background-color: #000;
-    color: #00ffcc;
-    border: 2px solid #00ffcc;
-    padding: 10px;
-    width: 50px;
-    text-align: center;
-    font-size: 1em;
-    margin-bottom: 20px;
-  }
-  
-  button {
-    font-family: 'Press Start 2P', monospace;
-    background-color: #00ffcc;
-    color: black;
-    border: none;
-    padding: 10px 20px;
-    margin: 10px 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    font-size: 0.8em;
-  }
-  
-  button:hover {
-    background-color: #00ccaa;
-  }
-  
-  #letras-digitadas {
-    margin: 10px 0;
-    font-size: 0.8em;
-  }
-  
-  #imagem-forca img {
-    width: 100px;
-    display: block;
-    margin: 10px auto;
-  }
-  
-  #mensagem-final {
-    font-size: 1em;
-    margin-top: 20px;
-    font-weight: bold;
-    color: #ff4444; /* vermelho vibrante em caso de derrota */
-  }
+  background-color: #111;
+  color: #00ffcc;
+  padding: 30px;
+  max-width: 600px;
+  margin: 50px auto;
+  text-align: center;
+  border-radius: 15px;
+  font-family: "Press Start 2P", monospace;
+  box-shadow: 0 0 20px #00ffcc;
+}
+
+#palavra-secreta {
+  font-size: 1.2em;
+  letter-spacing: 12px;
+  margin: 20px 0;
+}
+
+#letra {
+  font-family: "Press Start 2P", monospace;
+  background-color: #000;
+  color: #00ffcc;
+  border: 2px solid #00ffcc;
+  padding: 10px;
+  width: 50px;
+  text-align: center;
+  font-size: 1em;
+  margin-bottom: 20px;
+}
+
+button {
+  font-family: "Press Start 2P", monospace;
+  background-color: #00ffcc;
+  color: black;
+  border: none;
+  padding: 10px 20px;
+  margin: 10px 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 0.8em;
+}
+
+button:hover {
+  background-color: #00ccaa;
+}
+
+#letras-digitadas {
+  margin: 10px 0;
+  font-size: 0.8em;
+}
+
+/* Melhorando o estilo do container das imagens */
+#imagem-forca {
+  position: relative;
+  height: 150px;
+  width: 150px;
+  margin: 20px auto;
+  border: 2px solid #00ffcc;
+  border-radius: 10px;
+  background-color: rgba(0, 255, 204, 0.1);
+}
+
+#imagem-forca img {
+  width: 100px;
+  height: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+/* Classe para mostrar as imagens */
+#imagem-forca img.mostrar {
+  opacity: 1;
+}
+
+#mensagem-final {
+  font-size: 1em;
+  margin-top: 20px;
+  font-weight: bold;
+  color: #ff4444;
+}
+
+.ganhou {
+  color: #00ff00 !important;
+}
