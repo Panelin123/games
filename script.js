@@ -22,7 +22,7 @@ let erros = 0
 const palavraDiv = document.getElementById("palavra-secreta")
 const letraInput = document.getElementById("letra")
 const letrasDigitadasDiv = document.getElementById("letras-digitadas")
-const imagemDiv = document.getElementById("imagem-forca")
+const contadorDiv = document.getElementById("contador")
 const mensagemFinal = document.getElementById("mensagem-final")
 
 function escolherPalavra() {
@@ -49,7 +49,7 @@ function verificarLetra() {
   } else {
     letrasErradas.push(letra)
     erros++
-    atualizarImagem()
+    atualizarContador()
   }
 
   letrasDigitadasDiv.textContent = "Letras erradas: " + letrasErradas.join(", ")
@@ -57,35 +57,17 @@ function verificarLetra() {
   verificarFim()
 }
 
-const imagensErros = [
-  "/forca-peito.png",
-  "/forca-bra-o-esquerdo.png",
-  "/forca-bra-o-direito.png",
-  "/forca-perna-esquerda.png",
-  "/forca-perna-direita.png",
-  "/forca-cabe-a.png",
-]
+function atualizarContador() {
+  const tentativasRestantes = maxErros - erros
+  contadorDiv.textContent = tentativasRestantes
 
-function atualizarImagem() {
-  console.log("Atualizando imagem... Erros:", erros)
-
-  if (erros > 0 && erros <= maxErros) {
-    // Criar a imagem se ela não existir
-    let img = document.getElementById(`erro-${erros}`)
-    if (!img) {
-      img = document.createElement("img")
-      img.id = `erro-${erros}`
-      img.src = imagensErros[erros - 1]
-      img.alt = `Parte ${erros} da forca`
-      imagemDiv.appendChild(img)
-    }
-
-    // Mostrar a imagem com animação
-    setTimeout(() => {
-      img.classList.add("mostrar")
-    }, 100)
-
-    console.log(`Mostrando imagem ${erros}`)
+  // Mudando cor conforme as tentativas diminuem
+  if (tentativasRestantes <= 2) {
+    contadorDiv.style.color = "#ff0000" // Vermelho quando crítico
+  } else if (tentativasRestantes <= 4) {
+    contadorDiv.style.color = "#ff8800" // Laranja quando baixo
+  } else {
+    contadorDiv.style.color = "#44ff44" // Verde quando seguro
   }
 }
 
@@ -108,19 +90,20 @@ function reiniciarJogo() {
   mensagemFinal.textContent = ""
   mensagemFinal.classList.remove("ganhou")
   letraInput.disabled = false
-  imagemDiv.innerHTML = ""
+  contadorDiv.textContent = maxErros
+  contadorDiv.style.color = "#44ff44"
   letrasDigitadasDiv.textContent = ""
   escolherPalavra()
   mostrarPalavra()
 }
 
-// Permitir jogar pressionando Enter
+
 letraInput.addEventListener("keypress", (event) => {
   if (event.key === "Enter") {
     verificarLetra()
   }
 })
 
-// Inicializar o jogo
+
 escolherPalavra()
 mostrarPalavra()
