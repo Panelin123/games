@@ -1,7 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap');
+
+
 body {
+    font-family: 'Pixelify Sans', sans-serif;
     background-color: #1a0033;
     box-shadow: 0 0 20px #cc66ff;
     color: #cc66ff;
+  }
+
+  .titulo{
+    font-family: 'Pixelify Sans', sans-serif;;
   }
   
   .quebra_cabeca_container {
@@ -14,7 +22,7 @@ body {
     border-radius: 15px;
     font-family: "Press Start 2P", monospace;
     box-shadow: 0 0 20px #00ffcc;
-    font-style: https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap;
+
   }
   
   
