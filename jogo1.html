@@ -2,14 +2,14 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Jogo da Forca</title>
+  <title>Adivinhe a palavra-secreta</title>
   <link rel="stylesheet" href="forca.css">
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
 <body>
 
   <div class="forca-container">
-    <h1>Jogo da Forca</h1>
+    <h1 class="titulo"> Adiinhe a palavra-secreta</h1>
     <div id="palavra-secreta">_ _ _ _</div>
 
     <div id="letras-digitadas"></div>
@@ -21,9 +21,6 @@
     <div id="tentativas-restantes" style="text-align: center; margin: 20px auto; font-size: 18px; color: #ff4444;">
       <strong>Tentativas restantes: <span id="contador">6</span></strong>
     </div>
-
-
-    <div id="imagem-forca" style="position: relative; height: 150px; width: 150px; margin: 20px auto;"></div>
 
     <div id="mensagem-final"></div>
     <button onclick="reiniciarJogo()">Reiniciar</button>

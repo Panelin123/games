@@ -22,6 +22,10 @@ body {
   margin: 20px 0;
 }
 
+.titulo{
+  font-size: 20px;
+}
+
 #letra {
   font-family: "Press Start 2P", monospace;
   background-color: #000;
@@ -55,32 +59,6 @@ button:hover {
   font-size: 0.8em;
 }
 
-/* Melhorando o estilo do container das imagens */
-#imagem-forca {
-  position: relative;
-  height: 150px;
-  width: 150px;
-  margin: 20px auto;
-  border: 2px solid #00ffcc;
-  border-radius: 10px;
-  background-color: rgba(0, 255, 204, 0.1);
-}
-
-#imagem-forca img {
-  width: 100px;
-  height: auto;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  opacity: 0;
-  transition: opacity 0.5s ease-in-out;
-}
-
-/* Classe para mostrar as imagens */
-#imagem-forca img.mostrar {
-  opacity: 1;
-}
 
 #mensagem-final {
   font-size: 1em;
