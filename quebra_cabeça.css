@@ -1,0 +1,20 @@
+body {
+    background-color: #1a0033;
+    box-shadow: 0 0 20px #cc66ff;
+    color: #cc66ff;
+  }
+  
+  .quebra_cabeca_container {
+    background-color: #111;
+    color: #00ffcc;
+    padding: 30px;
+    max-width: 600px;
+    margin: 50px auto;
+    text-align: center;
+    border-radius: 15px;
+    font-family: "Press Start 2P", monospace;
+    box-shadow: 0 0 20px #00ffcc;
+    font-style: https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap;
+  }
+  
+  
