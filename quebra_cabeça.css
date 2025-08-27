@@ -88,7 +88,8 @@ h3 {
 .puzzle-piece {
     width: 100%;
     height: 100%;
-    background-size: 300% 300%;
+    background-size: cover;
+    background-position: center;
     border: 2px solid #666;
     border-radius: 5px;
     cursor: grab;
@@ -177,7 +178,45 @@ h3 {
     100% { opacity: 1; }
 }
 
-/* Cores das peças */
+/* Imagens das peças individuais - ALTERE OS NOMES DOS ARQUIVOS AQUI */
+.piece-1.with-image { 
+    background-image: url('peca1.jpg'); 
+    color: transparent;
+}
+.piece-2.with-image { 
+    background-image: url('peca2.jpg'); 
+    color: transparent;
+}
+.piece-3.with-image { 
+    background-image: url('peca3.jpg'); 
+    color: transparent;
+}
+.piece-4.with-image { 
+    background-image: url('peca4.jpg'); 
+    color: transparent;
+}
+.piece-5.with-image { 
+    background-image: url('peca5.jpg'); 
+    color: transparent;
+}
+.piece-6.with-image { 
+    background-image: url('peca6.jpg'); 
+    color: transparent;
+}
+.piece-7.with-image { 
+    background-image: url('peca7.jpg'); 
+    color: transparent;
+}
+.piece-8.with-image { 
+    background-image: url('peca8.jpg'); 
+    color: transparent;
+}
+.piece-9.with-image { 
+    background-image: url('peca9.jpg'); 
+    color: transparent;
+}
+
+/* Cores das peças (quando não há imagem) */
 .piece-1 { background-color: #ff6b6b; }
 .piece-2 { background-color: #4ecdc4; }
 .piece-3 { background-color: #45b7d1; }
