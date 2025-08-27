@@ -1,5 +1,6 @@
 let pecas = [];
 let jogoCompleto = false;
+let usandoImagem = false;
 
 
 function inicializarJogo() {
@@ -30,25 +31,25 @@ function criarPecas() {
     }
 }
 
-
 function embaralharPecas() {
     const container = document.getElementById('piecesContainer');
     const slots = container.querySelectorAll('.piece-slot');
+    
     
     const puzzleGrid = document.getElementById('puzzleGrid');
     puzzleGrid.querySelectorAll('.puzzle-piece').forEach(piece => {
         piece.remove();
     });
     
-   
+    
     slots.forEach(slot => {
         slot.innerHTML = '';
     });
     
- 
+    
     const pecasEmbaralhadas = [...pecas].sort(() => Math.random() - 0.5);
     
-    
+  
     pecasEmbaralhadas.forEach((peca, index) => {
         slots[index].appendChild(peca);
         peca.dataset.currentPosition = -1;
@@ -56,6 +57,24 @@ function embaralharPecas() {
     
     jogoCompleto = false;
     atualizarStatus("Pecas embaralhadas! Monte o quebra-cabeca.");
+}
+
+
+function alternarImagem() {
+    usandoImagem = !usandoImagem;
+    
+    pecas.forEach(peca => {
+        if (usandoImagem) {
+            peca.classList.add('with-image');
+            peca.textContent = ''; /
+        } else {
+            peca.classList.remove('with-image');
+            peca.textContent = parseInt(peca.dataset.originalPosition) + 1; 
+        }
+    });
+    
+    const status = usandoImagem ? "Modo imagem do Deku ativo!" : "Modo numeros ativo!";
+    atualizarStatus(status);
 }
 
 
@@ -92,7 +111,7 @@ function configurarEventos() {
         }
     });
 
-    
+   
     document.addEventListener('dragover', (e) => {
         e.preventDefault();
         if (e.target.classList.contains('drop-zone') || e.target.classList.contains('piece-slot')) {
@@ -115,7 +134,7 @@ function configurarEventos() {
         const piece = document.querySelector(`[data-original-position="${originalPosition}"]`);
 
         if (target.classList.contains('drop-zone')) {
-            
+           
             if (!target.querySelector('.puzzle-piece')) {
                 
                 const currentParent = piece.parentNode;
@@ -124,19 +143,19 @@ function configurarEventos() {
                 piece.dataset.currentPosition = target.dataset.position;
                 
                 if (currentParent.classList.contains('drop-zone')) {
-              
+                   
                 }
                 
                 verificarVitoria();
             }
         } else if (target.classList.contains('piece-slot') && !target.querySelector('.puzzle-piece')) {
-          
+            
             const currentParent = piece.parentNode;
             target.appendChild(piece);
             piece.dataset.currentPosition = -1;
             
             if (currentParent.classList.contains('drop-zone')) {
-               
+                
                 verificarVitoria();
             }
         }
@@ -157,7 +176,7 @@ function verificarVitoria() {
     
     if (pecasCorretas === 9) {
         jogoCompleto = true;
-        atualizarStatus("Parabens! Voce completou o quebra-cabeca!");
+        atualizarStatus("Parabens! Voce completou o quebra-cabeca do Deku!");
         document.getElementById('status').classList.add('victory');
         
        
