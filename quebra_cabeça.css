@@ -178,42 +178,41 @@ h3 {
     100% { opacity: 1; }
 }
 
-/* Imagens das peças individuais - ALTERE OS NOMES DOS ARQUIVOS AQUI */
 .piece-1.with-image { 
-    background-image: url('peca1.jpg'); 
-    color: transparent;
+    background-image: url('img/1.png'); 
+    /*color: transparent;*/
 }
 .piece-2.with-image { 
-    background-image: url('peca2.jpg'); 
-    color: transparent;
+    background-image: url('img/2.png'); 
+    /*color: transparent;*/
 }
 .piece-3.with-image { 
-    background-image: url('peca3.jpg'); 
-    color: transparent;
+    background-image: url('img/3.png'); 
+    /*color: transparent;*/
 }
 .piece-4.with-image { 
-    background-image: url('peca4.jpg'); 
-    color: transparent;
+    background-image: url('img/4.png'); 
+    /*color: transparent;*/
 }
 .piece-5.with-image { 
-    background-image: url('peca5.jpg'); 
-    color: transparent;
+    background-image: url('img/5.png'); 
+    /*color: transparent;*/
 }
 .piece-6.with-image { 
-    background-image: url('peca6.jpg'); 
-    color: transparent;
+    background-image: url('img/6.png'); 
+    /*color: transparent;*/
 }
 .piece-7.with-image { 
-    background-image: url('peca7.jpg'); 
-    color: transparent;
+    background-image: url('img/7.png'); 
+    /*color: transparent;*/
 }
 .piece-8.with-image { 
-    background-image: url('peca8.jpg'); 
-    color: transparent;
+    background-image: url('img/8.png'); 
+    /*color: transparent;*/
 }
 .piece-9.with-image { 
-    background-image: url('peca9.jpg'); 
-    color: transparent;
+    background-image: url('img/9.png'); 
+    /*color: transparent;*/
 }
 
 /* Cores das peças (quando não há imagem) */

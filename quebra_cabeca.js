@@ -11,6 +11,8 @@ function inicializarJogo() {
 
 
 function criarPecas() {
+    // Limpa a lista de peças para evitar duplicação
+    pecas = [];
     const container = document.getElementById('piecesContainer');
     container.innerHTML = '';
     
@@ -49,14 +51,14 @@ function embaralharPecas() {
     
     const pecasEmbaralhadas = [...pecas].sort(() => Math.random() - 0.5);
     
-  
+ 
     pecasEmbaralhadas.forEach((peca, index) => {
         slots[index].appendChild(peca);
         peca.dataset.currentPosition = -1;
     });
     
     jogoCompleto = false;
-    atualizarStatus("Pecas embaralhadas! Monte o quebra-cabeca.");
+    atualizarStatus("Pecas embaralhadas! Monte o quebra-cabeca!");
 }
 
 
@@ -66,7 +68,7 @@ function alternarImagem() {
     pecas.forEach(peca => {
         if (usandoImagem) {
             peca.classList.add('with-image');
-            peca.textContent = ''; /
+            peca.textContent = ''; 
         } else {
             peca.classList.remove('with-image');
             peca.textContent = parseInt(peca.dataset.originalPosition) + 1; 
@@ -82,7 +84,7 @@ function reiniciarJogo() {
     const puzzleGrid = document.getElementById('puzzleGrid');
     const dropZones = puzzleGrid.querySelectorAll('.drop-zone');
     
-   
+    
     dropZones.forEach(zone => {
         const piece = zone.querySelector('.puzzle-piece');
         if (piece) {
@@ -90,6 +92,12 @@ function reiniciarJogo() {
         }
     });
     
+    // Assegura que todas as peças no container de peças disponíveis também sejam removidas.
+    const piecesContainer = document.getElementById('piecesContainer');
+    piecesContainer.querySelectorAll('.puzzle-piece').forEach(piece => {
+        piece.remove();
+    });
+
     criarPecas();
     embaralharPecas();
     jogoCompleto = false;
@@ -97,7 +105,7 @@ function reiniciarJogo() {
 
 
 function configurarEventos() {
-   
+    
     document.addEventListener('dragstart', (e) => {
         if (e.target.classList.contains('puzzle-piece')) {
             e.target.classList.add('dragging');
@@ -111,7 +119,7 @@ function configurarEventos() {
         }
     });
 
-   
+    
     document.addEventListener('dragover', (e) => {
         e.preventDefault();
         if (e.target.classList.contains('drop-zone') || e.target.classList.contains('piece-slot')) {
@@ -134,7 +142,7 @@ function configurarEventos() {
         const piece = document.querySelector(`[data-original-position="${originalPosition}"]`);
 
         if (target.classList.contains('drop-zone')) {
-           
+            
             if (!target.querySelector('.puzzle-piece')) {
                 
                 const currentParent = piece.parentNode;
@@ -143,7 +151,7 @@ function configurarEventos() {
                 piece.dataset.currentPosition = target.dataset.position;
                 
                 if (currentParent.classList.contains('drop-zone')) {
-                   
+                    
                 }
                 
                 verificarVitoria();
@@ -179,7 +187,7 @@ function verificarVitoria() {
         atualizarStatus("Parabens! Voce completou o quebra-cabeca do Deku!");
         document.getElementById('status').classList.add('victory');
         
-       
+        
         const pieces = document.querySelectorAll('.puzzle-piece');
         pieces.forEach((piece, index) => {
             setTimeout(() => {
