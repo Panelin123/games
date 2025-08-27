@@ -180,42 +180,41 @@ h3 {
 
 .piece-1.with-image { 
     background-image: url('img/1.png'); 
-    /*color: transparent;*/
+    
 }
 .piece-2.with-image { 
     background-image: url('img/2.png'); 
-    /*color: transparent;*/
+   
 }
 .piece-3.with-image { 
     background-image: url('img/3.png'); 
-    /*color: transparent;*/
+    
 }
 .piece-4.with-image { 
     background-image: url('img/4.png'); 
-    /*color: transparent;*/
 }
 .piece-5.with-image { 
     background-image: url('img/5.png'); 
-    /*color: transparent;*/
+    
 }
 .piece-6.with-image { 
     background-image: url('img/6.png'); 
-    /*color: transparent;*/
+    
 }
 .piece-7.with-image { 
     background-image: url('img/7.png'); 
-    /*color: transparent;*/
+    
 }
 .piece-8.with-image { 
     background-image: url('img/8.png'); 
-    /*color: transparent;*/
+  
 }
 .piece-9.with-image { 
     background-image: url('img/9.png'); 
-    /*color: transparent;*/
+    
 }
 
-/* Cores das peças (quando não há imagem) */
+
 .piece-1 { background-color: #ff6b6b; }
 .piece-2 { background-color: #4ecdc4; }
 .piece-3 { background-color: #45b7d1; }
@@ -226,7 +225,7 @@ h3 {
 .piece-8 { background-color: #f7dc6f; }
 .piece-9 { background-color: #bb8fce; }
 
-/* Responsividade */
+
 @media (max-width: 768px) {
     .puzzle-area {
         flex-direction: column;
