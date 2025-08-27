@@ -11,7 +11,7 @@ function inicializarJogo() {
 
 
 function criarPecas() {
-    // Limpa a lista de peças para evitar duplicação
+   
     pecas = [];
     const container = document.getElementById('piecesContainer');
     container.innerHTML = '';
@@ -92,7 +92,7 @@ function reiniciarJogo() {
         }
     });
     
-    // Assegura que todas as peças no container de peças disponíveis também sejam removidas.
+    
     const piecesContainer = document.getElementById('piecesContainer');
     piecesContainer.querySelectorAll('.puzzle-piece').forEach(piece => {
         piece.remove();
