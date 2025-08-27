@@ -3,14 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="quebra_cabeça.css"/>
+    <link rel="stylesheet" href="quebra_cabeca.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
     <title>Quebra-Cabeça</title>
 </head>
 <body>
     <div class="quebra_cabeca_container">
-        <h1 class="titulo"> Monte a imagem </h1>
+        <h1 class="titulo">🧩 Monte a imagem 🧩</h1>
+        
+        <div class="controles">
+            <button class="btn" onclick="embaralharPecas()">🎲 Embaralhar</button>
+            <button class="btn" onclick="reiniciarJogo()">🔄 Reiniciar</button>
+        </div>
+
+        <div class="puzzle-area">
+            <div>
+                <h3>Área do Quebra-Cabeça</h3>
+                <div class="puzzle-grid" id="puzzleGrid">
+                    <div class="drop-zone" data-position="0"></div>
+                    <div class="drop-zone" data-position="1"></div>
+                    <div class="drop-zone" data-position="2"></div>
+                    <div class="drop-zone" data-position="3"></div>
+                    <div class="drop-zone" data-position="4"></div>
+                    <div class="drop-zone" data-position="5"></div>
+                    <div class="drop-zone" data-position="6"></div>
+                    <div class="drop-zone" data-position="7"></div>
+                    <div class="drop-zone" data-position="8"></div>
+                </div>
+            </div>
+
+            <div class="pieces-container">
+                <h3>Peças Disponíveis</h3>
+                <div class="pieces-grid" id="piecesContainer">
+                    <div class="piece-slot"></div>
+                    <div class="piece-slot"></div>
+                    <div class="piece-slot"></div>
+                    <div class="piece-slot"></div>
+                    <div class="piece-slot"></div>
+                    <div class="piece-slot"></div>
+                    <div class="piece-slot"></div>
+                    <div class="piece-slot"></div>
+                    <div class="piece-slot"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="status" id="status">
+            Arraste as peças para montar o quebra-cabeça!
+        </div>
     </div>
 
+    <script src="quebra_cabeca.js"></script>
 </body>
 </html>
