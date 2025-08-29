@@ -10,7 +10,7 @@ class Game:
         self.can_flip = True
 
     def reset(self):
-        # Lista de imagens para as cartas
+        
         images = [
             'img1.jpg', 'img2.jpg', 'img3.jpg', 'img4.jpg', 
             'img5.jpg', 'img6.jpg', 'img1.jpg', 'img2.jpg', 
@@ -29,7 +29,7 @@ class Game:
             self.cards[card_index]['flipped'] = True
             self.flipped_cards.append(card_index)
 
-            # Verifica se o jogador fez um par
+            
             if len(self.flipped_cards) == 2:
                 card1, card2 = self.flipped_cards
                 if self.cards[card1]['image'] == self.cards[card2]['image']:
