@@ -1,0 +1,36 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #4CAF50;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 3em;
+}
+
+#game-board {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.card {
+    background-color: #666;
+    color: #fff;
+    font-size: 2em;
+    padding: 20px;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: transform 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.1);
+}
+
+#scoreboard {
+    font-size: 1.2em;
+}
