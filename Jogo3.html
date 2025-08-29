@@ -7,10 +7,12 @@
     <link rel="stylesheet" href="memoria.css">
 </head>
 <body>
-    <h1>Jogo da Memória</h1>
+
+    <div class="memoria_container">
+   <div class="titulo"><h1>Jogo da Memória</h1>
 
     <div id="game-board"></div>
-
+    
     <button onclick="startGame()">Reiniciar Jogo</button>
 
     <div id="scoreboard">
@@ -18,6 +20,8 @@
         <p>Jogador 2: <span id="score2">0</span></p>
         <p>Vez do Jogador: <span id="current-player">1</span></p>
     </div>
+    </div>
+    </div> 
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>

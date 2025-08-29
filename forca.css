@@ -16,6 +16,26 @@ body {
   box-shadow: 0 0 20px #00ffcc;
 }
 
+@keyframes typing {
+  0% { width: 0; }
+  100% { width: 100%; }
+}
+
+h1 {
+  font-size: 3em;
+  overflow: hidden; 
+  border-right: .1em solid #00ffcc; 
+  white-space: nowrap; 
+  width: 0; 
+  animation: typing 3s steps(30) 1s forwards, blink 0.75s step-end infinite; 
+}
+
+
+@keyframes blink {
+  50% { border-color: transparent; }
+}
+
+
 #palavra-secreta {
   font-size: 1.2em;
   letter-spacing: 12px;
