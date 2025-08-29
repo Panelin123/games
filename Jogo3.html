@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo da Memória</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Jogo da Memória</h1>
+
+    <div id="game-board"></div>
+
+    <button onclick="startGame()">Reiniciar Jogo</button>
+
+    <div id="scoreboard">
+        <p>Jogador 1: <span id="score1">0</span></p>
+        <p>Jogador 2: <span id="score2">0</span></p>
+        <p>Vez do Jogador: <span id="current-player">1</span></p>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        let gameState = {};
+
+        
+        function startGame() {
+            $.get('/start_game', function(data) {
+                gameState = data;
+                renderGameBoard();
+            });
+        }
+
+        function renderGameBoard() {
+            let gameBoard = $('#game-board');
+            gameBoard.empty();
+            gameState.cards.forEach((card, index) => {
+                let cardElement = $('<div class="card"></div>');
+                cardElement.text(card.flipped ? card.image : '❓');
+                cardElement.click(() => flipCard(index));
+                gameBoard.append(cardElement);
+            });
+            updateScoreboard();
+        }
+
+        function flipCard(index) {
+            $.post('/flip_card', { card_index: index, player: gameState.current_player }, function(data) {
+                gameState = data;
+                renderGameBoard();
+            });
+        }
+
+        function updateScoreboard() {
+            $('#score1').text(gameState.scores[1]);
+            $('#score2').text(gameState.scores[2]);
+            $('#current-player').text(gameState.current_player);
+        }
+
+        $(document).ready(function() {
+            startGame(); // Inicia o jogo ao carregar
+        });
+    </script>
+</body>
+</html>
