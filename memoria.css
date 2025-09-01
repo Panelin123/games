@@ -9,6 +9,7 @@ body {
     font-family: "Press Start 2P", monospace;
 }
 
+
 .memoria_container {
     background-color: #111;
     color: #00ffcc;
@@ -44,6 +45,7 @@ h1 {
 
 button {
     background-color: #00ffcc;
+    font-family: "Press Start 2P", monospace;
     color: #1a0033;
     font-size: 1.2em;
     padding: 15px 30px;
