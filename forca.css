@@ -1,7 +1,10 @@
 body {
-  background-color: #1a0033;
-  box-shadow: 0 0 20px #cc66ff;
+  background: url('https://i.redd.it/4d5x3a8zy70b1.gif') no-repeat center center;
+  background-size: cover; 
+  min-height: 100vh; 
+  margin: 0; 
   color: #cc66ff;
+  box-shadow: 0 0 20px #cc66ff;
 }
 
 .forca-container {
