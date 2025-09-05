@@ -15,15 +15,15 @@ body {
   align-items: center;
   gap: 10px;
   padding: 10px 15px;
-  background: transparent; /* sem fundo no container para tirar "caixa" */
+  background: transparent; 
   box-shadow: 0 0 15px 5px rgba(0,0,0,0.6);
   max-width: 320px;
   z-index: 1000;
 }
 
 .mascote {
-  width: 60px;
-  height: auto;
+  width: 150px;
+  height: 150px;
   filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.7));
   background: transparent;
 }
@@ -41,7 +41,6 @@ body {
   max-width: 220px;
 }
 
-
 .balao-fala::after {
   content: '';
   position: absolute;
@@ -56,6 +55,33 @@ body {
   filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.4));
 }
 
+.menu-btn {
+  background-color: #00ffcc; 
+  font-family: "Press Start 2P", monospace;
+  color: #1a0033;
+  font-size: 1.2em;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 20px 10px;
+  position: fixed; 
+  bottom: 20px; 
+  left: 20px; 
+  z-index: 1001; 
+}
+
+.menu-btn:hover {
+  background-color: #cc66ff; 
+  color: #fff;
+  transform: scale(1.1);
+  box-shadow: 0 0 10px #cc66ff;
+}
+
+.menu-btn:focus {
+  outline: none;
+}
 
 .forca-container {
   background-color: #111;
@@ -83,11 +109,9 @@ h1 {
   animation: typing 3s steps(30) 1s forwards, blink 0.75s step-end infinite; 
 }
 
-
 @keyframes blink {
   50% { border-color: transparent; }
 }
-
 
 #palavra-secreta {
   font-size: 1.2em;
@@ -132,6 +156,11 @@ button:hover {
   font-size: 0.8em;
 }
 
+#letras-certas {
+  margin: 10px 0;
+  font-size: 0.9em;
+  color: #44ff44; /* Cor verde para as letras corretas */
+}
 
 #mensagem-final {
   font-size: 1em;
