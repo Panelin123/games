@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Tech</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="quiz.css">
+</head>
+<body class="overflow-hidden">
+    <!-- Tela Inicial -->
+    <div id="homeScreen" class="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 flex items-center justify-center p-4">
+        <div class="text-center space-y-8 max-w-md mx-auto">
+            <!-- Ícone Animado -->
+            <div class="relative">
+                <div class="absolute inset-0 bg-gradient-to-r from-pink-500 to-violet-500 rounded-full blur-xl opacity-50 animate-pulse"></div>
+                <div class="relative bg-gradient-to-r from-purple-600 to-pink-600 rounded-full p-6 inline-block">
+                    <svg class="w-16 h-16 text-white animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Título -->
+            <div class="space-y-4">
+                <h1 class="text-5xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent animate-pulse">
+                    Quiz Tech
+                </h1>
+                <p class="text-gray-300 text-lg">
+                    Teste seus conhecimentos em computação e lógica!
+                </p>
+            </div>
+
+            <!-- Stats -->
+            <div class="flex justify-center space-x-6 text-sm">
+                <div class="text-center">
+                    <div class="text-cyan-400 font-bold text-xl" id="totalQuestions">8</div>
+                    <div class="text-gray-400">Perguntas</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-purple-400 font-bold text-xl">15s</div>
+                    <div class="text-gray-400">Por pergunta</div>
+                </div>
+            </div>
+
+            <!-- Botão Iniciar -->
+            <button onclick="startQuiz()" class="group bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-bold py-4 px-8 rounded-2xl text-xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl flex items-center mx-auto space-x-2">
+                <svg class="w-6 h-6 group-hover:animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                </svg>
+                <span>Iniciar Quiz</span>
+                <svg class="w-6 h-6 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Tela do Quiz -->
+    <div id="quizScreen" class="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 p-4 hidden">
+        <div class="max-w-4xl mx-auto pt-8">
+            <!-- Header -->
+            <div class="flex justify-between items-center mb-8">
+                <div class="text-white">
+                    <span class="text-sm opacity-75">Pergunta</span>
+                    <div class="text-2xl font-bold">
+                        <span id="currentQuestionNum">1</span> / <span id="totalQuestionsQuiz">8</span>
+                    </div>
+                </div>
+                
+                <!-- Timer -->
+                <div class="relative">
+                    <div class="w-16 h-16 rounded-full border-4 border-gray-600 flex items-center justify-center">
+                        <div id="timerDisplay" class="text-xl font-bold text-white">15</div>
+                    </div>
+                    <svg class="absolute top-0 left-0 w-16 h-16 transform -rotate-90">
+                        <circle id="timerCircle" cx="32" cy="32" r="28" stroke="currentColor" stroke-width="4" fill="transparent" class="text-blue-500 transition-all duration-1000" stroke-dasharray="175.93 175.93"></circle>
+                    </svg>
+                </div>
+
+                <div class="text-white text-right">
+                    <span class="text-sm opacity-75">Pontuação</span>
+                    <div class="text-2xl font-bold" id="currentScore">0</div>
+                </div>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="w-full bg-gray-700 rounded-full h-2 mb-8">
+                <div id="progressBar" class="bg-gradient-to-r from-cyan-500 to-purple-500 h-2 rounded-full transition-all duration-500" style="width: 12.5%"></div>
+            </div>
+
+            <!-- Question Card -->
+            <div class="bg-white/10 backdrop-blur-lg rounded-3xl p-8 mb-8 border border-white/20">
+                <h2 id="questionText" class="text-white text-2xl font-bold mb-8 text-center leading-relaxed">
+                    Carregando pergunta...
+                </h2>
+
+                <!-- Options -->
+                <div id="optionsContainer" class="space-y-4">
+                    <!-- Options serão inseridas aqui pelo JavaScript -->
+                </div>
+
+                <!-- Explanation -->
+                <div id="explanationContainer" class="mt-6 p-4 bg-blue-500/20 rounded-2xl border border-blue-500/30 animate-fadeIn hidden">
+                    <p id="explanationText" class="text-blue-200 text-center font-medium"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tela de Resultados -->
+    <div id="resultScreen" class="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 flex items-center justify-center p-4 hidden">
+        <div class="text-center space-y-8 max-w-md mx-auto">
+            <!-- Troféu -->
+            <div class="relative">
+                <div class="absolute inset-0 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full blur-xl opacity-50 animate-pulse"></div>
+                <div class="relative bg-gradient-to-r from-yellow-500 to-orange-500 rounded-full p-6 inline-block">
+                    <svg class="w-16 h-16 text-white animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Results -->
+            <div class="space-y-6">
+                <h1 class="text-4xl font-bold text-white">Quiz Finalizado!</h1>
+                
+                <!-- Score Circle -->
+                <div class="relative mx-auto w-32 h-32">
+                    <svg class="w-32 h-32 transform -rotate-90">
+                        <circle cx="64" cy="64" r="56" stroke="currentColor" stroke-width="8" fill="transparent" class="text-gray-600"></circle>
+                        <circle id="scoreCircle" cx="64" cy="64" r="56" stroke="currentColor" stroke-width="8" fill="transparent" class="text-purple-400 animate-pulse" stroke-dasharray="351.86" stroke-dashoffset="351.86"></circle>
+                    </svg>
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <span id="percentageDisplay" class="text-3xl font-bold text-white">0%</span>
+                    </div>
+                </div>
+
+                <div class="space-y-2">
+                    <p id="scoreMessage" class="text-xl font-bold text-green-400"></p>
+                    <p id="finalScoreText" class="text-gray-300"></p>
+                </div>
+            </div>
+
+           
+            <button onclick="resetQuiz()" class="group bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-bold py-4 px-8 rounded-2xl text-xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl flex items-center mx-auto space-x-2">
+                <svg class="w-6 h-6 group-hover:rotate-180 transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0V9a8.002 8.002 0 0115.356 2M15.418 15h.582v4a8.003 8.003 0 01-15.356-2m15.356 0V15a8.002 8.002 0 00-15.356 2"></path>
+                </svg>
+                <span>Jogar Novamente</span>
+            </button>
+        </div>
+    </div>
+
+    <script src="app3.js"></script>
+</body>
+</html>
