@@ -58,17 +58,18 @@ body {
     margin-top: -12px;
     filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.4));
   }
-.quebra_cabeca_container {
-    background-color: #111;
-    color: #00ffcc;
-    padding: 30px;
-    max-width: 800px;
-    margin: 20px auto;
-    text-align: center;
-    border-radius: 15px;
-    box-shadow: 0 0 20px #00ffcc;
-}
 
+.quebra_cabeca_container {
+        background-color: rgba(17, 17, 17, 0.8); 
+        color: #00ffcc;
+        padding: 30px;
+        max-width: 800px;
+        margin: 20px auto;
+        text-align: center;
+        border-radius: 15px;
+        box-shadow: 0 0 20px #00ffcc;
+    }
+    
 .menu-btn {
     background-color: #00ffcc; 
     font-family: "Press Start 2P", monospace;

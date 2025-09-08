@@ -81,8 +81,54 @@ body {
   background-color: #00ffcc;
   font-family: 'Press Start 2P', monospace;
   color: #1a0033;
-  font-size: 1em;
-  padding: 15px 30px;
+  font-size: 0.5em; 
+  padding: 5px 10px; 
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 20px 10px;
+  display: inline-block;
+  text-decoration: none;
+  box-shadow: 2px 2px 8px #000;
+}
+
+
+.buttons .btn:hover {
+  background-color: #cc66ff;
+  color: #fff;
+  transform: scale(1.1);
+  box-shadow: 0 0 12px #cc66ff;
+}
+
+h1 {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 2em;
+  color: #00ffcc;
+  background-color: rgba(0, 0, 0, 0.6); 
+  padding: 20px 40px;
+  border: 4px solid #00ffcc;
+  border-radius: 12px;
+  text-shadow: 3px 3px 0 #000, 5px 5px 0 #cc66ff;
+  box-shadow: 0 0 15px #00ffcc, 0 0 25px #00ffcc;
+  margin-bottom: 40px;
+  margin-top: -20px; 
+  animation: blink 2s infinite;
+  display: inline-block; 
+}
+
+.buttons {
+  margin-top: -190px; 
+  margin-left: -650px;
+  
+}
+
+.buttons .btn {
+  background-color: #00ffcc;
+  font-family: 'Press Start 2P', monospace;
+  color: #1a0033;
+  font-size: 0.6em;
+  padding: 10px 15px;
   border: none;
   border-radius: 10px;
   cursor: pointer;
@@ -100,17 +146,30 @@ body {
   box-shadow: 0 0 12px #cc66ff;
 }
 
+.buttons-jogo4 {
+  margin-top: -65px; 
+  margin-left: 1200px; 
+}
 
-h1 {
+.buttons-jogo4 .btn {
+  background-color: #00ffcc;
   font-family: 'Press Start 2P', monospace;
-  font-size: 2em;
-  color: #00ffcc;
-  background-color: rgba(0, 0, 0, 0.6); 
-  padding: 20px 40px;
-  border: 4px solid #00ffcc;
-  border-radius: 12px;
-  text-shadow: 3px 3px 0 #000, 5px 5px 0 #cc66ff;
-  box-shadow: 0 0 15px #00ffcc, 0 0 25px #00ffcc;
-  margin-bottom: 40px;
-  animation: blink 2s infinite;
+  color: #1a0033;
+  font-size: 0.6em;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 20px 10px;
+  display: inline-block;
+  text-decoration: none;
+  box-shadow: 2px 2px 8px #000;
+}
+
+.buttons-jogo4 .btn:hover {
+  background-color: #cc66ff;
+  color: #fff;
+  transform: scale(1.1);
+  box-shadow: 0 0 12px #cc66ff;
 }
