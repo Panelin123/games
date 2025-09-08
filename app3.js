@@ -1,14 +1,13 @@
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 
-// Configurações do jogo
 const GRID_SIZE = 20;
 const CANVAS_WIDTH = canvas.width;
 const CANVAS_HEIGHT = canvas.height;
 const GRID_WIDTH = CANVAS_WIDTH / GRID_SIZE;
 const GRID_HEIGHT = CANVAS_HEIGHT / GRID_SIZE;
 
-// Estado do jogo
+
 let gameState = {
     snake: [{ x: 10, y: 10 }],
     direction: { x: 1, y: 0 },
@@ -20,7 +19,7 @@ let gameState = {
     gameLoop: null
 };
 
-// Cores e estilos
+
 const colors = {
     snake: '#4caf50',
     snakeHead: '#2e7d32',
@@ -35,17 +34,17 @@ function initGame() {
 }
 
 function drawGame() {
-    // Limpar canvas
+    
     ctx.fillStyle = colors.background;
     ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 
-    // Desenhar grade
+    
     drawGrid();
 
-    // Desenhar cobra
+  
     drawSnake();
 
-    // Desenhar comida
+    
     drawFood();
 }
 
@@ -73,17 +72,17 @@ function drawSnake() {
         const x = segment.x * GRID_SIZE;
         const y = segment.y * GRID_SIZE;
         
-        // Cabeça da cobra é diferente
+        
         if (index === 0) {
             ctx.fillStyle = colors.snakeHead;
             ctx.fillRect(x + 2, y + 2, GRID_SIZE - 4, GRID_SIZE - 4);
             
-            // Olhos da cobra
+            
             ctx.fillStyle = '#fff';
             ctx.fillRect(x + 6, y + 6, 3, 3);
             ctx.fillRect(x + 11, y + 6, 3, 3);
         } else {
-            // Corpo da cobra com gradiente
+            
             const opacity = 1 - (index * 0.05);
             ctx.fillStyle = colors.snake;
             ctx.globalAlpha = Math.max(opacity, 0.3);
@@ -97,12 +96,12 @@ function drawFood() {
     const x = gameState.food.x * GRID_SIZE;
     const y = gameState.food.y * GRID_SIZE;
     
-    // Comida com efeito pulsante
+  
     const pulseSize = 2 + Math.sin(Date.now() * 0.01) * 1;
     ctx.fillStyle = colors.food;
     ctx.fillRect(x + pulseSize, y + pulseSize, GRID_SIZE - pulseSize * 2, GRID_SIZE - pulseSize * 2);
     
-    // Brilho na comida
+
     ctx.fillStyle = '#ffab00';
     ctx.fillRect(x + 6, y + 6, 8, 8);
 }
@@ -112,13 +111,13 @@ function moveSnake() {
     head.x += gameState.direction.x;
     head.y += gameState.direction.y;
 
-    // Verificar colisões com paredes
+    
     if (head.x < 0 || head.x >= GRID_WIDTH || head.y < 0 || head.y >= GRID_HEIGHT) {
         gameOver();
         return;
     }
 
-    // Verificar colisão com o próprio corpo
+    
     if (gameState.snake.some(segment => segment.x === head.x && segment.y === head.y)) {
         gameOver();
         return;
@@ -126,7 +125,7 @@ function moveSnake() {
 
     gameState.snake.unshift(head);
 
-    // Verificar se comeu a comida
+    
     if (head.x === gameState.food.x && head.y === gameState.food.y) {
         gameState.score += 10;
         generateFood();
@@ -233,14 +232,14 @@ function gameOver() {
     gameState.isRunning = false;
     clearInterval(gameState.gameLoop);
     
-    // Atualizar recorde
+ 
     if (gameState.score > gameState.highScore) {
         gameState.highScore = gameState.score;
         localStorage.setItem('snakeHighScore', gameState.highScore);
         updateDisplay();
     }
     
-    // Mostrar modal de game over
+   
     document.getElementById('finalScore').textContent = `Pontuação Final: ${gameState.score}`;
     document.getElementById('gameOverModal').style.display = 'flex';
 }
@@ -325,5 +324,5 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-// Inicializar o jogo
+
 initGame();
