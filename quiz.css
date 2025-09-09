@@ -259,8 +259,14 @@ body {
     margin-bottom: 25px;
     color: #fff; 
     text-shadow: 0 0 15px #ff4444;
+    display: flex;
+    justify-content: center; 
+    gap: 10px; 
 }
 
+.game-over-title span {
+    display: inline-block; 
+}
 .final-score {
     font-size: 2em;
     color: #ff4444;
