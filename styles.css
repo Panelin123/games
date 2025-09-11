@@ -1,0 +1,329 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Courier New', monospace;
+    background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #0f0f23 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    overflow: hidden;
+}
+
+.game-container {
+    position: relative;
+    border: 3px solid rgba(255,255,255,0.2);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 30px rgba(0,0,0,0.8);
+}
+
+#gameCanvas {
+    display: block;
+    background: linear-gradient(180deg, #1a1a2e 0%, #0f0f23 100%);
+}
+
+.ui-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 20px;
+    pointer-events: none;
+}
+
+.health-bar {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: rgba(0,0,0,0.7);
+    padding: 10px 15px;
+    border-radius: 25px;
+    border: 2px solid rgba(255,255,255,0.3);
+    backdrop-filter: blur(10px);
+}
+
+.player-avatar {
+    position: relative;
+    width: 40px;
+    height: 40px;
+}
+
+.avatar-head {
+    width: 20px;
+    height: 20px;
+    background: #1a1a1a;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 2px solid #fff;
+}
+
+.avatar-head::after {
+    content: '';
+    width: 4px;
+    height: 4px;
+    background: white;
+    border-radius: 50%;
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    box-shadow: 0 0 5px rgba(255,255,255,0.8);
+}
+
+.avatar-body {
+    width: 25px;
+    height: 20px;
+    background: #4a5568;
+    border-radius: 0 0 15px 15px;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 2px solid #2d3748;
+}
+
+.health-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.health-bg {
+    width: 200px;
+    height: 20px;
+    background: #2d1b1b;
+    border-radius: 10px;
+    border: 2px solid #444;
+    overflow: hidden;
+}
+
+.health-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #22c55e 0%, #16a34a 50%, #dc2626 100%);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.health-text {
+    color: #fff;
+    font-weight: bold;
+    font-size: 14px;
+    min-width: 50px;
+}
+
+.boss-health {
+    position: absolute;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(139, 0, 0, 0.9);
+    padding: 15px 25px;
+    border-radius: 15px;
+    border: 2px solid #ff4444;
+    backdrop-filter: blur(10px);
+    animation: bossHealthPulse 2s ease-in-out infinite;
+}
+
+@keyframes bossHealthPulse {
+    0%, 100% { box-shadow: 0 0 10px rgba(255, 68, 68, 0.5); }
+    50% { box-shadow: 0 0 20px rgba(255, 68, 68, 0.8); }
+}
+
+.boss-name {
+    text-align: center;
+    color: #ff6b6b;
+    font-weight: bold;
+    margin-bottom: 8px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+}
+
+.boss-health-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.boss-health-bg {
+    width: 300px;
+    height: 20px;
+    background: #4a1a1a;
+    border-radius: 10px;
+    border: 2px solid #800000;
+    overflow: hidden;
+}
+
+.boss-health-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #ff6b6b 0%, #dc2626 50%, #991b1b 100%);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.boss-health-text {
+    color: #ff6b6b;
+    font-weight: bold;
+    font-size: 14px;
+    min-width: 60px;
+}
+
+.controls-hint {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(0,0,0,0.7);
+    padding: 15px;
+    border-radius: 10px;
+    border: 2px solid rgba(255,255,255,0.2);
+    backdrop-filter: blur(10px);
+}
+
+.control-item {
+    font-size: 12px;
+    margin-bottom: 5px;
+    color: rgba(255,255,255,0.8);
+}
+
+.game-over-modal, .victory-modal, .start-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.start-screen {
+    background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #0f0f23 100%);
+}
+
+.modal-content, .start-content {
+    background: rgba(20, 20, 40, 0.95);
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+    max-width: 500px;
+    border: 3px solid rgba(255,255,255,0.3);
+    backdrop-filter: blur(15px);
+    animation: modalPop 0.5s ease;
+}
+
+.victory-content {
+    background: rgba(40, 20, 60, 0.95);
+    border-color: rgba(255,215,0,0.5);
+}
+
+.start-content {
+    background: rgba(20, 20, 40, 0.98);
+    border-color: rgba(100,200,255,0.5);
+}
+
+@keyframes modalPop {
+    0% { transform: scale(0.5); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.modal-title, .game-title {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    text-shadow: 3px 3px 6px rgba(0,0,0,0.8);
+    background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: titleGlow 3s ease infinite;
+}
+
+.game-title {
+    background: linear-gradient(45deg, #64b5f6, #42a5f5, #1e88e5);
+}
+
+@keyframes titleGlow {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+.game-subtitle {
+    font-size: 1.2em;
+    color: rgba(255,255,255,0.8);
+    margin-bottom: 30px;
+    font-style: italic;
+}
+
+.modal-message {
+    font-size: 1.1em;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    color: rgba(255,255,255,0.9);
+    font-style: italic;
+}
+
+.btn {
+    padding: 15px 30px;
+    font-size: 1.1em;
+    font-weight: bold;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    pointer-events: all;
+    font-family: 'Courier New', monospace;
+}
+
+.btn-restart {
+    background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+    color: white;
+    border: 2px solid rgba(255,107,107,0.5);
+}
+
+.btn-victory {
+    background: linear-gradient(45deg, #ffd700, #ffb347);
+    color: #1a1a1a;
+    border: 2px solid rgba(255,215,0,0.5);
+}
+
+.btn-start {
+    background: linear-gradient(45deg, #64b5f6, #42a5f5);
+    color: white;
+    border: 2px solid rgba(100,181,246,0.5);
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+}
+
+.btn:active {
+    transform: translateY(-1px);
+}
+
+@media (max-width: 1100px) {
+    #gameCanvas {
+        width: 100%;
+        height: auto;
+    }
+
+    .controls-hint {
+        font-size: 10px;
+    }
+
+    .health-bar {
+        scale: 0.8;
+    }
+}
