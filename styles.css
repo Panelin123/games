@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&family=Press+Start+2P&display=swap');
+
 * {
     margin: 0;
     padding: 0;
@@ -5,29 +7,201 @@
 }
 
 body {
-    font-family: 'Courier New', monospace;
-    background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #0f0f23 100%);
+    font-family: "Press Start 2P", monospace;
+    background: url('https://i.redd.it/bpxxqqvps4h91.gif') no-repeat center center fixed;
+    background-size: cover;
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
+    color: #00ffcc;
     overflow: hidden;
+    text-shadow: 2px 2px #1a0033;
+}
+
+/* =========================
+   FUNDO RETRÔ NEON
+========================= */
+body {
+    background: linear-gradient(135deg, #0d0d0d, #1a0033);
+    font-family: "Press Start 2P", monospace;
+    color: #00ffcc;
+    margin: 0;
+    overflow: hidden;
+}
+
+/* =========================
+   CANVAS
+========================= */
+canvas {
+    background-color: #000;
+    display: block;
+    margin: 20px auto;
+    border: 4px solid #00ffcc;
+    box-shadow: 0 0 20px #00ffcc, 0 0 40px #cc66ff;
+    image-rendering: pixelated;
+}
+
+/* =========================
+   INTERFACE (BARRAS/OVERLAYS)
+========================= */
+#game-ui {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    width: 90%;
+    max-width: 900px;
+}
+
+.health-bar, .mana-bar, .xp-bar {
+    height: 24px;
+    border: 3px solid #00ffcc;
+    border-radius: 12px;
+    margin: 8px 0;
+    background: #1a1a1a;
+    overflow: hidden;
+    box-shadow: 0 0 10px #00ffcc;
+}
+
+.health-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #ff0044, #ff8800);
+    width: 75%;
+}
+
+.mana-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #0044ff, #8800ff);
+    width: 50%;
+}
+
+.xp-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #00ffcc, #ccff33);
+    width: 30%;
+}
+
+/* =========================
+   TEXTO RETRÔ
+========================= */
+h1, h2, h3, p {
+    text-shadow: 2px 2px 0 #000, 0 0 8px #cc66ff;
+}
+
+/* =========================
+   MODAIS
+========================= */
+.modal {
+    background: #1a0033;
+    border: 4px solid #00ffcc;
+    padding: 25px;
+    border-radius: 15px;
+    color: #fff;
+    box-shadow: 0 0 20px #00ffcc, 0 0 40px #cc66ff;
+    font-size: 0.9em;
+}
+
+/* =========================
+   MASCOTE E BALÃO DE FALA
+========================= */
+.mascote-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 15px;
+    background: transparent;
+    box-shadow: 0 0 15px 5px rgba(0,0,0,0.6);
+    max-width: 320px;
+    z-index: 1000;
+}
+
+.mascote {
+    width: 150px;
+    height: 150px;
+    filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.7));
+    background: transparent;
+}
+
+.balao-fala {
+    background: #fff;
+    border: 3px solid #00ffcc;
+    border-radius: 15px;
+    padding: 10px 15px;
+    font-family: "Press Start 2P", monospace;
+    color: #1a0033;
+    font-size: 0.9em;
+    box-shadow: 3px 3px 8px #00ffcc;
+    position: relative;
+    max-width: 220px;
+    text-shadow: none;
+}
+
+.balao-fala::after {
+    content: '';
+    position: absolute;
+    bottom: 50%;
+    left: -15px;
+    width: 0;
+    height: 0;
+    border: 12px solid transparent;
+    border-right-color: #fff;
+    border-left: 0;
+    margin-top: -12px;
+    filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.4));
+}
+
+/* =========================
+   BOTÃO MENU FIXO
+========================= */
+.menu-btn {
+    background-color: #00ffcc;
+    font-family: "Press Start 2P", monospace;
+    color: #1a0033;
+    font-size: 1.2em;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 20px 10px;
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 1001;
+    box-shadow: 0 0 15px #00ffcc;
+}
+
+.menu-btn:hover {
+    background-color: #cc66ff;
+    color: #fff;
+    transform: scale(1.1);
+    box-shadow: 0 0 20px #cc66ff, 0 0 30px #ffcc00;
+}
+
+.menu-btn:focus {
+    outline: none;
 }
 
 .game-container {
     position: relative;
-    border: 3px solid rgba(255,255,255,0.2);
-    border-radius: 10px;
+    border: 3px solid #00ffcc;
+    border-radius: 15px;
     overflow: hidden;
-    box-shadow: 0 0 30px rgba(0,0,0,0.8);
+    box-shadow: 0 0 25px #00ffcc;
+    background: rgba(0,0,0,0.6);
 }
 
 #gameCanvas {
     display: block;
-    background: linear-gradient(180deg, #1a1a2e 0%, #0f0f23 100%);
+    background: linear-gradient(180deg, #111 0%, #000 100%);
 }
 
+/* Overlay UI */
 .ui-overlay {
     position: absolute;
     top: 0;
@@ -38,15 +212,16 @@ body {
     pointer-events: none;
 }
 
+/* Barra de vida do jogador */
 .health-bar {
     display: flex;
     align-items: center;
     gap: 15px;
-    background: rgba(0,0,0,0.7);
+    background: rgba(0,0,0,0.8);
     padding: 10px 15px;
     border-radius: 25px;
-    border: 2px solid rgba(255,255,255,0.3);
-    backdrop-filter: blur(10px);
+    border: 2px solid #00ffcc;
+    box-shadow: 0 0 15px #00ffcc;
 }
 
 .player-avatar {
@@ -58,39 +233,41 @@ body {
 .avatar-head {
     width: 20px;
     height: 20px;
-    background: #1a1a1a;
+    background: #1a0033;
     border-radius: 50%;
     position: absolute;
     top: 0;
     left: 50%;
     transform: translateX(-50%);
-    border: 2px solid #fff;
+    border: 2px solid #00ffcc;
+    box-shadow: 0 0 10px #00ffcc;
 }
 
 .avatar-head::after {
     content: '';
     width: 4px;
     height: 4px;
-    background: white;
+    background: #fff;
     border-radius: 50%;
     position: absolute;
     top: 6px;
     left: 6px;
-    box-shadow: 0 0 5px rgba(255,255,255,0.8);
+    box-shadow: 0 0 6px #fff;
 }
 
 .avatar-body {
     width: 25px;
     height: 20px;
-    background: #4a5568;
+    background: #cc66ff;
     border-radius: 0 0 15px 15px;
     position: absolute;
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
-    border: 2px solid #2d3748;
+    border: 2px solid #00ffcc;
 }
 
+/* Barra de vida */
 .health-container {
     display: flex;
     align-items: center;
@@ -100,100 +277,98 @@ body {
 .health-bg {
     width: 200px;
     height: 20px;
-    background: #2d1b1b;
+    background: #330033;
     border-radius: 10px;
-    border: 2px solid #444;
+    border: 2px solid #00ffcc;
     overflow: hidden;
 }
 
 .health-fill {
     height: 100%;
-    background: linear-gradient(90deg, #22c55e 0%, #16a34a 50%, #dc2626 100%);
+    background: linear-gradient(90deg, #00ffcc 0%, #cc66ff 50%, #ff0066 100%);
     border-radius: 8px;
     transition: all 0.3s ease;
     width: 100%;
+    box-shadow: 0 0 10px #00ffcc;
 }
 
 .health-text {
     color: #fff;
     font-weight: bold;
-    font-size: 14px;
-    min-width: 50px;
+    font-size: 12px;
+    min-width: 60px;
 }
 
+/* Boss health */
 .boss-health {
     position: absolute;
     top: 80px;
     left: 50%;
     transform: translateX(-50%);
-    background: rgba(139, 0, 0, 0.9);
+    background: rgba(26, 0, 51, 0.95);
     padding: 15px 25px;
     border-radius: 15px;
-    border: 2px solid #ff4444;
-    backdrop-filter: blur(10px);
+    border: 2px solid #cc66ff;
+    box-shadow: 0 0 20px #cc66ff;
     animation: bossHealthPulse 2s ease-in-out infinite;
 }
 
 @keyframes bossHealthPulse {
-    0%, 100% { box-shadow: 0 0 10px rgba(255, 68, 68, 0.5); }
-    50% { box-shadow: 0 0 20px rgba(255, 68, 68, 0.8); }
+    0%, 100% { box-shadow: 0 0 10px #cc66ff; }
+    50% { box-shadow: 0 0 20px #00ffcc; }
 }
 
 .boss-name {
     text-align: center;
-    color: #ff6b6b;
+    color: #ff66ff;
     font-weight: bold;
     margin-bottom: 8px;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
-}
-
-.boss-health-container {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+    text-shadow: 2px 2px 4px #000;
 }
 
 .boss-health-bg {
     width: 300px;
     height: 20px;
-    background: #4a1a1a;
+    background: #330033;
     border-radius: 10px;
-    border: 2px solid #800000;
+    border: 2px solid #cc66ff;
     overflow: hidden;
 }
 
 .boss-health-fill {
     height: 100%;
-    background: linear-gradient(90deg, #ff6b6b 0%, #dc2626 50%, #991b1b 100%);
+    background: linear-gradient(90deg, #ff66ff 0%, #cc00cc 50%, #990099 100%);
     border-radius: 8px;
     transition: all 0.3s ease;
     width: 100%;
 }
 
 .boss-health-text {
-    color: #ff6b6b;
+    color: #cc66ff;
     font-weight: bold;
-    font-size: 14px;
+    font-size: 12px;
     min-width: 60px;
 }
 
+/* Controles */
 .controls-hint {
     position: absolute;
     top: 20px;
     right: 20px;
-    background: rgba(0,0,0,0.7);
+    background: rgba(0,0,0,0.8);
     padding: 15px;
     border-radius: 10px;
-    border: 2px solid rgba(255,255,255,0.2);
-    backdrop-filter: blur(10px);
+    border: 2px solid #00ffcc;
+    box-shadow: 0 0 10px #00ffcc;
 }
 
 .control-item {
-    font-size: 12px;
+    font-size: 10px;
     margin-bottom: 5px;
-    color: rgba(255,255,255,0.8);
+    color: #00ffcc;
 }
 
+/* Modais */
 .game-over-modal, .victory-modal, .start-screen {
     position: absolute;
     top: 0;
@@ -207,29 +382,26 @@ body {
     z-index: 1000;
 }
 
-.start-screen {
-    background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #0f0f23 100%);
-}
-
 .modal-content, .start-content {
-    background: rgba(20, 20, 40, 0.95);
+    background: rgba(20, 20, 40, 0.98);
     padding: 40px;
     border-radius: 20px;
     text-align: center;
     max-width: 500px;
-    border: 3px solid rgba(255,255,255,0.3);
-    backdrop-filter: blur(15px);
+    border: 3px solid #00ffcc;
+    box-shadow: 0 0 20px #cc66ff;
     animation: modalPop 0.5s ease;
 }
 
 .victory-content {
     background: rgba(40, 20, 60, 0.95);
-    border-color: rgba(255,215,0,0.5);
+    border-color: #ffd700;
+    box-shadow: 0 0 25px #ffd700;
 }
 
 .start-content {
     background: rgba(20, 20, 40, 0.98);
-    border-color: rgba(100,200,255,0.5);
+    border-color: #00ffcc;
 }
 
 @keyframes modalPop {
@@ -238,18 +410,14 @@ body {
 }
 
 .modal-title, .game-title {
-    font-size: 2.5em;
+    font-size: 2em;
     margin-bottom: 20px;
-    text-shadow: 3px 3px 6px rgba(0,0,0,0.8);
-    background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1);
+    text-shadow: 3px 3px 6px #000;
+    background: linear-gradient(45deg, #00ffcc, #cc66ff, #ff0066);
     background-size: 200% 200%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     animation: titleGlow 3s ease infinite;
-}
-
-.game-title {
-    background: linear-gradient(45deg, #64b5f6, #42a5f5, #1e88e5);
 }
 
 @keyframes titleGlow {
@@ -258,59 +426,53 @@ body {
 }
 
 .game-subtitle {
-    font-size: 1.2em;
-    color: rgba(255,255,255,0.8);
+    font-size: 1em;
+    color: #cc66ff;
     margin-bottom: 30px;
     font-style: italic;
 }
 
-.modal-message {
-    font-size: 1.1em;
-    line-height: 1.6;
-    margin-bottom: 30px;
-    color: rgba(255,255,255,0.9);
-    font-style: italic;
-}
-
+/* Botões */
 .btn {
     padding: 15px 30px;
-    font-size: 1.1em;
+    font-size: 0.9em;
     font-weight: bold;
     border: none;
-    border-radius: 25px;
+    border-radius: 15px;
     cursor: pointer;
     transition: all 0.3s ease;
     text-transform: uppercase;
     letter-spacing: 2px;
     pointer-events: all;
-    font-family: 'Courier New', monospace;
+    font-family: "Press Start 2P", monospace;
+    box-shadow: 0 0 15px #00ffcc;
 }
 
 .btn-restart {
-    background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+    background: linear-gradient(45deg, #ff0066, #cc66ff);
     color: white;
-    border: 2px solid rgba(255,107,107,0.5);
+    border: 2px solid #ff66ff;
 }
 
 .btn-victory {
     background: linear-gradient(45deg, #ffd700, #ffb347);
     color: #1a1a1a;
-    border: 2px solid rgba(255,215,0,0.5);
+    border: 2px solid #ffd700;
 }
 
 .btn-start {
-    background: linear-gradient(45deg, #64b5f6, #42a5f5);
-    color: white;
-    border: 2px solid rgba(100,181,246,0.5);
+    background: linear-gradient(45deg, #00ffcc, #0099aa);
+    color: #1a0033;
+    border: 2px solid #00ffcc;
 }
 
 .btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    transform: scale(1.1);
+    box-shadow: 0 0 20px #cc66ff;
 }
 
 .btn:active {
-    transform: translateY(-1px);
+    transform: scale(0.95);
 }
 
 @media (max-width: 1100px) {
@@ -320,7 +482,7 @@ body {
     }
 
     .controls-hint {
-        font-size: 10px;
+        font-size: 8px;
     }
 
     .health-bar {
