@@ -63,6 +63,8 @@ let enemies = [];
 let platforms = [];
 
 
+
+
 function initPlatforms() {
     platforms = [
        

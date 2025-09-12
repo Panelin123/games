@@ -18,21 +18,98 @@ body {
     overflow: hidden;
     text-shadow: 2px 2px #1a0033;
 }
-
-/* =========================
-   FUNDO RETRÔ NEON
-========================= */
 body {
-    background: linear-gradient(135deg, #0d0d0d, #1a0033);
     font-family: "Press Start 2P", monospace;
     color: #00ffcc;
     margin: 0;
     overflow: hidden;
+    background-image: url('https://wallpapers-clan.com/wp-content/uploads/2025/07/hollow-knight-silent-guardian-desktop-wallpaper-preview.jpg');
+    background-size: cover; 
+    background-position: center center; 
+    background-attachment: fixed; 
 }
 
-/* =========================
-   CANVAS
-========================= */
+@keyframes explosionEffect {
+    0% {
+        transform: scale(0.5);
+        opacity: 1;
+        background-color: #ff0000;
+    }
+    50% {
+        transform: scale(2);
+        opacity: 0.5;
+        background-color: #ff6600;
+    }
+    100% {
+        transform: scale(4);
+        opacity: 0;
+        background-color: #ff0000;
+    }
+}
+
+.explosion {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #ff0000;
+    opacity: 0;
+    pointer-events: none;
+    animation: explosionEffect 0.6s ease-out forwards;
+}
+
+.game-over-modal .modal-title {
+    color: #ff0000; 
+    text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 30px #ff0000; 
+    animation: titleGlow 1.5s ease-in-out infinite;
+}
+
+
+@keyframes titleGlow {
+    0%, 100% {
+        text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 30px #ff0000;
+    }
+    50% {
+        text-shadow: 0 0 20px #ff0000, 0 0 40px #ff0000, 0 0 60px #ff0000;
+    }
+}
+
+
+.game-over-modal .modal-message {
+    color: #ffffff; 
+    font-size: 1.2em;
+    margin-top: 10px;
+    text-align: center;
+}
+
+
+.game-over-modal .btn-restart {
+    background: linear-gradient(45deg, #ff0066, #cc66ff);
+    color: white;
+    border: 2px solid #ff66ff;
+    margin-top: 20px;
+    font-size: 1.1em;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.game-over-modal .btn-restart:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px #ff0000, 0 0 25px #ff0000;
+}
+
+
+.game-over-modal .modal-content {
+    background: linear-gradient(45deg, #ff0000, #660000); 
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 0 25px #ff0000;
+}
+
+
 canvas {
     background-color: #000;
     display: block;
@@ -42,9 +119,6 @@ canvas {
     image-rendering: pixelated;
 }
 
-/* =========================
-   INTERFACE (BARRAS/OVERLAYS)
-========================= */
 #game-ui {
     position: absolute;
     top: 20px;
@@ -83,16 +157,10 @@ canvas {
     width: 30%;
 }
 
-/* =========================
-   TEXTO RETRÔ
-========================= */
 h1, h2, h3, p {
     text-shadow: 2px 2px 0 #000, 0 0 8px #cc66ff;
 }
 
-/* =========================
-   MODAIS
-========================= */
 .modal {
     background: #1a0033;
     border: 4px solid #00ffcc;
@@ -103,9 +171,6 @@ h1, h2, h3, p {
     font-size: 0.9em;
 }
 
-/* =========================
-   MASCOTE E BALÃO DE FALA
-========================= */
 .mascote-container {
     position: fixed;
     bottom: 20px;
@@ -155,9 +220,6 @@ h1, h2, h3, p {
     filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.4));
 }
 
-/* =========================
-   BOTÃO MENU FIXO
-========================= */
 .menu-btn {
     background-color: #00ffcc;
     font-family: "Press Start 2P", monospace;
@@ -201,7 +263,6 @@ h1, h2, h3, p {
     background: linear-gradient(180deg, #111 0%, #000 100%);
 }
 
-/* Overlay UI */
 .ui-overlay {
     position: absolute;
     top: 0;
@@ -212,7 +273,6 @@ h1, h2, h3, p {
     pointer-events: none;
 }
 
-/* Barra de vida do jogador */
 .health-bar {
     display: flex;
     align-items: center;
@@ -267,7 +327,6 @@ h1, h2, h3, p {
     border: 2px solid #00ffcc;
 }
 
-/* Barra de vida */
 .health-container {
     display: flex;
     align-items: center;
@@ -299,7 +358,6 @@ h1, h2, h3, p {
     min-width: 60px;
 }
 
-/* Boss health */
 .boss-health {
     position: absolute;
     top: 80px;
@@ -350,7 +408,6 @@ h1, h2, h3, p {
     min-width: 60px;
 }
 
-/* Controles */
 .controls-hint {
     position: absolute;
     top: 20px;
@@ -368,7 +425,6 @@ h1, h2, h3, p {
     color: #00ffcc;
 }
 
-/* Modais */
 .game-over-modal, .victory-modal, .start-screen {
     position: absolute;
     top: 0;
@@ -413,16 +469,18 @@ h1, h2, h3, p {
     font-size: 2em;
     margin-bottom: 20px;
     text-shadow: 3px 3px 6px #000;
-    background: linear-gradient(45deg, #00ffcc, #cc66ff, #ff0066);
-    background-size: 200% 200%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: titleGlow 3s ease infinite;
+    color: #00ffcc; /* Cor neon sólida */
+    text-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc, 0 0 30px #00ffcc; /* Efeito neon no texto */
+    animation: titleGlow 1.5s ease-in-out infinite; /* Você pode ajustar a duração e o timing */
 }
 
 @keyframes titleGlow {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
+    0%, 100% {
+        text-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc, 0 0 30px #00ffcc;
+    }
+    50% {
+        text-shadow: 0 0 20px #00ffcc, 0 0 40px #00ffcc, 0 0 60px #00ffcc;
+    }
 }
 
 .game-subtitle {
@@ -432,7 +490,6 @@ h1, h2, h3, p {
     font-style: italic;
 }
 
-/* Botões */
 .btn {
     padding: 15px 30px;
     font-size: 0.9em;
