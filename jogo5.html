@@ -1,90 +1,21 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shadow Knight - Aventura Completa</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Metroidvania - Esperança</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+        canvas {
+            display: block;
+        }
+    </style>
 </head>
 <body>
-      <button class="btn menu-btn" onclick="window.location.href='menu.html'"> Menu</button>
-  <div class="mascote-container">
-    <img src="img/image-removebg-preview.png" alt="Mascote" class="mascote" />
-    <div class="balao-fala">
-      esse é o jogo de adivinhar a palavra, me ajude a descorbrir a palavra secreta :-3
-    </div>
-  </div>
-
-    <div class="game-container">
-       
-        <canvas id="gameCanvas" width="1000" height="600"></canvas>
-        
-        <div class="ui-overlay" id="uiOverlay">
-            <div class="health-bar">
-                <div class="player-avatar">
-                    <div class="avatar-head"></div>
-                    <div class="avatar-body"></div>
-                </div>
-                <div class="health-container">
-                    <div class="health-bg">
-                        <div class="health-fill" id="healthFill"></div>
-                    </div>
-                    <span class="health-text" id="healthText">20/20</span>
-                </div>
-            </div>
-
-            <div class="boss-health" id="bossHealth">
-                <div class="boss-name">Rei dos Insetos</div>
-                <div class="boss-health-container">
-                    <div class="boss-health-bg">
-                        <div class="boss-health-fill" id="bossHealthFill"></div>
-                    </div>
-                    <span class="boss-health-text" id="bossHealthText">30/30</span>
-                </div>
-            </div>
-
-            <div class="controls-hint">
-                <div class="control-item">↑ Pular</div>
-                <div class="control-item">↓ Agachar</div>
-                <div class="control-item">← → Mover</div>
-                <div class="control-item">A Lançar Ferrão</div>
-                <div class="control-item">B Estocar</div>
-            </div>
-        </div>
-
-       
-        <div class="cutscene-overlay" id="cutsceneOverlay">
-            <button class="skip-button" onclick="skipCutscene()">Pular ⏭️</button>
-            
-            <div class="dialogue-box" id="dialogueBox">
-                <div class="dialogue-text" id="dialogueText"></div>
-            </div>
-
-            <div class="title-overlay" id="titleOverlay">
-                <div>
-                    <div class="game-title">⚔️ SHADOW KNIGHT ⚔️</div>
-                </div>
-            </div>
-        </div>
-
-      
-        <div class="game-over-modal" id="gameOverModal">
-            <div class="modal-content">
-                <h2 class="modal-title">💀 A Escuridão Venceu 💀</h2>
-                <p class="modal-message">"Mesmo os maiores cavaleiros podem sucumbir às sombras. Levante-se e tente novamente, pequeno guerreiro."</p>
-                <button class="btn btn-restart" onclick="restartGame()">⚔️ Renascer</button>
-            </div>
-        </div>
-
-        <div class="victory-modal" id="victoryModal">
-            <div class="modal-content victory-content">
-                <h2 class="modal-title">🏆 Vitória Gloriosa! 🏆</h2>
-                <p class="modal-message">"O Rei dos Insetos foi derrotado! Você trouxe paz a estas terras sombrias!"</p>
-                <button class="btn btn-victory" onclick="restartGame()">✨ Nova Jornada</button>
-            </div>
-        </div>
-    </div>
-
-    <script src="game.js"></script>
+    <canvas id="gameCanvas"></canvas>
+    <script src="game.js"></script> <!-- Link para o arquivo JavaScript -->
 </body>
 </html>
