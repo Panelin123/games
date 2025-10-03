@@ -16,6 +16,10 @@
   </div>
 
   <div class="forca-container">
+
+    <div class="menu-container">
+      <audio id="bgAudio" src="AUD-20250922-WA0027.mp3" preload="auto" loop playsinline></audio>
+
     <h1 class="titulo"> Adiinhe a palavra-secreta</h1>
     <div id="palavra-secreta">_ _ _ _</div>
     
@@ -24,7 +28,7 @@
     </div>
 
     <div id="letras-digitadas"></div>
-    <div id="letras-certas"></div> <!-- Novo div para letras corretas -->
+    <div id="letras-certas"></div> 
 
     <input type="text" id="letra" maxlength="1" autofocus placeholder="Digite uma letra" />
     <button onclick="verificarLetra()">Tentar</button>
@@ -36,6 +40,42 @@
     <div id="mensagem-final"></div>
     <button onclick="reiniciarJogo()">Reiniciar</button>
   </div>
+
+  <button id="playFallback" aria-label="Ativar som">Ativar som</button>
+
+  <script>
+    (function() {
+      const audio = document.getElementById('bgAudio');
+      const fallback = document.getElementById('playFallback');
+
+      function tryAutoplay() {
+        audio.play().then(() => {
+          console.log('Áudio tocando automaticamente');
+        }).catch((err) => {
+          console.warn('Autoplay bloqueado:', err);
+          fallback.style.display = 'block';
+        });
+      }
+
+      fallback.addEventListener('click', function() {
+        audio.play().then(() => {
+          fallback.style.display = 'none';
+        }).catch((e) => {
+          console.error('Erro ao iniciar áudio após clique:', e);
+        });
+      });
+
+      document.addEventListener('DOMContentLoaded', tryAutoplay);
+
+      function unlockOnFirstInteraction() {
+        audio.play().catch(()=>{});
+        document.removeEventListener('click', unlockOnFirstInteraction);
+        document.removeEventListener('touchstart', unlockOnFirstInteraction);
+      }
+      document.addEventListener('click', unlockOnFirstInteraction);
+      document.addEventListener('touchstart', unlockOnFirstInteraction);
+    })();
+  </script>
 
   <script src="script.js"></script>
 </body>

@@ -173,3 +173,23 @@ h1 {
   transform: scale(1.1);
   box-shadow: 0 0 12px #cc66ff;
 }
+
+
+#playFallback {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  background: rgba(0,0,0,0.6);
+  color: white;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  display: none; 
+  z-index: 9999;
+}
+
+#playFallback:active {
+  transform: scale(0.98);
+}

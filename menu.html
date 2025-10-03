@@ -10,14 +10,14 @@
   <div class="mascote-container">
     <img src="img/image-removebg-preview.png" alt="Mascote" class="mascote" />
     <div class="balao-fala">
-      Seja bem-vindo ao Anti-Wifi, aqui você pdoe jogar jogos sem internet. 
-      
+      Seja bem-vindo ao Anti-Wifi, aqui você pode jogar jogos sem internet. 
       Eu sou Mono e serei seu guia pelos jogos!
     </div>
   </div>
 
   <div class="menu-container">
-  
+    <audio id="bgAudio" src="AUD-20250922-WA0027.mp3" preload="auto" loop playsinline></audio>
+
     <div class="buttons">
       <a href="jogo1.html" class="btn"> Palavra Secreta</a>
       <a href="jogo2.html" class="btn">Quebra-Cabeça</a>
@@ -30,5 +30,41 @@
     </div>
   </div>
 
+ 
+  <button id="playFallback" aria-label="Ativar som">Ativar som</button>
+
+  <script>
+    (function() {
+      const audio = document.getElementById('bgAudio');
+      const fallback = document.getElementById('playFallback');
+
+      function tryAutoplay() {
+        audio.play().then(() => {
+          console.log('Áudio tocando automaticamente');
+        }).catch((err) => {
+          console.warn('Autoplay bloqueado:', err);
+          fallback.style.display = 'block';
+        });
+      }
+
+      fallback.addEventListener('click', function() {
+        audio.play().then(() => {
+          fallback.style.display = 'none';
+        }).catch((e) => {
+          console.error('Erro ao iniciar áudio após clique:', e);
+        });
+      });
+
+      document.addEventListener('DOMContentLoaded', tryAutoplay);
+
+      function unlockOnFirstInteraction() {
+        audio.play().catch(()=>{});
+        document.removeEventListener('click', unlockOnFirstInteraction);
+        document.removeEventListener('touchstart', unlockOnFirstInteraction);
+      }
+      document.addEventListener('click', unlockOnFirstInteraction);
+      document.addEventListener('touchstart', unlockOnFirstInteraction);
+    })();
+  </script>
 </body>
 </html>
