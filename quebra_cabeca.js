@@ -1,7 +1,7 @@
 let pecas = [];
 let jogoCompleto = false;
 let usandoImagem = false;
-
+let pecaOriginalParent = null;
 
 function inicializarJogo() {
     criarPecas();
@@ -9,9 +9,7 @@ function inicializarJogo() {
     configurarEventos();
 }
 
-
 function criarPecas() {
-   
     pecas = [];
     const container = document.getElementById('piecesContainer');
     container.innerHTML = '';
@@ -37,30 +35,25 @@ function embaralharPecas() {
     const container = document.getElementById('piecesContainer');
     const slots = container.querySelectorAll('.piece-slot');
     
-    
     const puzzleGrid = document.getElementById('puzzleGrid');
     puzzleGrid.querySelectorAll('.puzzle-piece').forEach(piece => {
         piece.remove();
     });
     
-    
     slots.forEach(slot => {
         slot.innerHTML = '';
     });
     
-    
     const pecasEmbaralhadas = [...pecas].sort(() => Math.random() - 0.5);
     
- 
     pecasEmbaralhadas.forEach((peca, index) => {
         slots[index].appendChild(peca);
         peca.dataset.currentPosition = -1;
     });
     
     jogoCompleto = false;
-    atualizarStatus("Pecas embaralhadas! Monte o quebra-cabeca!");
+    atualizarStatus("Peças embaralhadas! Monte o quebra-cabeça!");
 }
-
 
 function alternarImagem() {
     usandoImagem = !usandoImagem;
@@ -75,15 +68,13 @@ function alternarImagem() {
         }
     });
     
-    const status = usandoImagem ? "Modo imagem do Deku ativo!" : "Modo numeros ativo!";
+    const status = usandoImagem ? "Modo imagem do Deku ativo!" : "Modo números ativo!";
     atualizarStatus(status);
 }
-
 
 function reiniciarJogo() {
     const puzzleGrid = document.getElementById('puzzleGrid');
     const dropZones = puzzleGrid.querySelectorAll('.drop-zone');
-    
     
     dropZones.forEach(zone => {
         const piece = zone.querySelector('.puzzle-piece');
@@ -91,7 +82,6 @@ function reiniciarJogo() {
             piece.remove();
         }
     });
-    
     
     const piecesContainer = document.getElementById('piecesContainer');
     piecesContainer.querySelectorAll('.puzzle-piece').forEach(piece => {
@@ -103,13 +93,36 @@ function reiniciarJogo() {
     jogoCompleto = false;
 }
 
+// FUNÇÃO PARA FAZER A PEÇA BALANÇAR E VOLTAR
+function shakeAndReturn(piece, originalParent) {
+    // Adiciona animação de balanço
+    piece.classList.add('shake-animation');
+    
+    // Após o balanço, retorna a peça para o local original
+    setTimeout(() => {
+        piece.classList.remove('shake-animation');
+        
+        // Move a peça de volta para o parent original
+        if (originalParent) {
+            originalParent.appendChild(piece);
+            piece.classList.add('returning-animation');
+            
+            // Remove a animação de retorno
+            setTimeout(() => {
+                piece.classList.remove('returning-animation');
+            }, 500);
+        }
+    }, 600);
+}
 
 function configurarEventos() {
-    
     document.addEventListener('dragstart', (e) => {
         if (e.target.classList.contains('puzzle-piece')) {
             e.target.classList.add('dragging');
             e.dataTransfer.setData('text/plain', e.target.dataset.originalPosition);
+            
+            // Guarda o parent original da peça
+            pecaOriginalParent = e.target.parentNode;
         }
     });
 
@@ -119,7 +132,6 @@ function configurarEventos() {
         }
     });
 
-    
     document.addEventListener('dragover', (e) => {
         e.preventDefault();
         if (e.target.classList.contains('drop-zone') || e.target.classList.contains('piece-slot')) {
@@ -142,34 +154,38 @@ function configurarEventos() {
         const piece = document.querySelector(`[data-original-position="${originalPosition}"]`);
 
         if (target.classList.contains('drop-zone')) {
+            const targetPosition = parseInt(target.dataset.position);
+            const pieceCorrectPosition = parseInt(piece.dataset.originalPosition);
             
-            if (!target.querySelector('.puzzle-piece')) {
-                
-                const currentParent = piece.parentNode;
-                
+            // Verifica se o slot já está preenchido
+            if (target.querySelector('.puzzle-piece')) {
+                atualizarStatus("❌ Esse espaço já está ocupado!");
+                shakeAndReturn(piece, pecaOriginalParent);
+                return;
+            }
+            
+            // VERIFICA SE A POSIÇÃO ESTÁ CORRETA
+            if (pieceCorrectPosition === targetPosition) {
+                // CORRETO! Coloca a peça
                 target.appendChild(piece);
                 piece.dataset.currentPosition = target.dataset.position;
-                
-                if (currentParent.classList.contains('drop-zone')) {
-                    
-                }
-                
+                atualizarStatus("✅ Muito bem! Peça na posição correta!");
                 verificarVitoria();
+            } else {
+                // ERRADO! Faz balançar e volta
+                atualizarStatus("❌ Ops! Essa peça não vai aí!");
+                shakeAndReturn(piece, pecaOriginalParent);
             }
-        } else if (target.classList.contains('piece-slot') && !target.querySelector('.puzzle-piece')) {
             
-            const currentParent = piece.parentNode;
+        } else if (target.classList.contains('piece-slot') && !target.querySelector('.puzzle-piece')) {
+            // Permite mover de volta para a área de peças
             target.appendChild(piece);
             piece.dataset.currentPosition = -1;
-            
-            if (currentParent.classList.contains('drop-zone')) {
-                
-                verificarVitoria();
-            }
+            atualizarStatus("Peça movida de volta para as disponíveis.");
+            verificarVitoria();
         }
     });
 }
-
 
 function verificarVitoria() {
     const dropZones = document.querySelectorAll('.drop-zone');
@@ -184,9 +200,8 @@ function verificarVitoria() {
     
     if (pecasCorretas === 9) {
         jogoCompleto = true;
-        atualizarStatus("Parabens! Voce completou o quebra-cabeca do Deku!");
+        atualizarStatus("🎉 Parabéns! Você completou o quebra-cabeça do Deku! 🎉");
         document.getElementById('status').classList.add('victory');
-        
         
         const pieces = document.querySelectorAll('.puzzle-piece');
         pieces.forEach((piece, index) => {
@@ -199,14 +214,8 @@ function verificarVitoria() {
         });
     } else {
         document.getElementById('status').classList.remove('victory');
-        if (pecasCorretas > 0) {
-            atualizarStatus(`Muito bem! ${pecasCorretas}/9 pecas no lugar certo.`);
-        } else {
-            atualizarStatus("Continue tentando! Arraste as pecas para o lugar certo.");
-        }
     }
 }
-
 
 function atualizarStatus(mensagem) {
     document.getElementById('status').textContent = mensagem;

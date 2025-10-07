@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="quebra_cabeca.css"/>
+    <link rel="stylesheet" href="quebra_cabeça.css"/>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="quebra_cabeça.css" />
     <title>Quebra-Cabeça</title>
 </head>
 <body>
@@ -60,13 +59,13 @@
     <div class="mascote-container">
         <img src="img/image-removebg-preview.png" alt="Mascote" class="mascote" />
         <div class="balao-fala">
-          Nesse jogo temos que organizar os numeros na ordem correta, acha que consegue?
+          Nesse jogo temos que organizar os números na ordem correta, acha que consegue?
         </div>
-      </div>
+    </div>
 
-      <button id="playFallback" aria-label="Ativar som">Ativar som</button>
+    <button id="playFallback" aria-label="Ativar som">Ativar som</button>
 
-      <script>
+    <script>
         (function() {
           const audio = document.getElementById('bgAudio');
           const fallback = document.getElementById('playFallback');
@@ -98,9 +97,7 @@
           document.addEventListener('click', unlockOnFirstInteraction);
           document.addEventListener('touchstart', unlockOnFirstInteraction);
         })();
-      </script>
-    
-      <script src="script.js"></script>
+    </script>
     
     <script src="quebra_cabeca.js"></script>
 </body>
