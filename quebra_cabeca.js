@@ -3,10 +3,23 @@ let jogoCompleto = false;
 let usandoImagem = false;
 let pecaOriginalParent = null;
 
+let PECAS_ESTATICAS = [];
 
-const PECAS_ESTATICAS = [2, 4, 7];
+function escolherPecasEstaticas() {
+   
+    const todasPecas = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+    
+    
+    const embaralhado = todasPecas.sort(() => Math.random() - 0.5);
+    
+   
+    PECAS_ESTATICAS = embaralhado.slice(0, 3);
+    
+    console.log('Peças estáticas:', PECAS_ESTATICAS.map(i => i + 1));
+}
 
 function inicializarJogo() {
+    escolherPecasEstaticas(); 
     criarPecas();
     embaralharPecas();
     configurarEventos();
@@ -34,13 +47,12 @@ function criarPecas() {
             peca.style.opacity = '0.7';
             peca.style.cursor = 'not-allowed';
             
-        
             dropZones[i].appendChild(peca);
             peca.dataset.currentPosition = i;
         } else {
             peca.draggable = true;
             
-          
+            
             const slot = document.createElement('div');
             slot.className = 'piece-slot';
             slot.appendChild(peca);
@@ -55,18 +67,18 @@ function embaralharPecas() {
     const container = document.getElementById('piecesContainer');
     const slots = container.querySelectorAll('.piece-slot');
     
-    
+   
     const puzzleGrid = document.getElementById('puzzleGrid');
     puzzleGrid.querySelectorAll('.puzzle-piece:not(.static-piece)').forEach(piece => {
         piece.remove();
     });
     
-    
+
     slots.forEach(slot => {
         slot.innerHTML = '';
     });
     
-   
+    
     const pecasMoveis = pecas.filter((peca, index) => !PECAS_ESTATICAS.includes(index));
     const pecasEmbaralhadas = [...pecasMoveis].sort(() => Math.random() - 0.5);
     
@@ -76,7 +88,8 @@ function embaralharPecas() {
     });
     
     jogoCompleto = false;
-    atualizarStatus("Peças embaralhadas! Monte o quebra-cabeça! (3, 5 e 8 já estão no lugar)");
+    const numerosEstaticos = PECAS_ESTATICAS.map(i => i + 1).sort((a, b) => a - b).join(', ');
+    atualizarStatus(`Peças embaralhadas! Monte o quebra-cabeça! (${numerosEstaticos} já estão no lugar)`);
 }
 
 function alternarImagem() {
@@ -99,7 +112,7 @@ function alternarImagem() {
 function reiniciarJogo() {
     const puzzleGrid = document.getElementById('puzzleGrid');
     
-   
+ 
     const imagemCompleta = puzzleGrid.querySelector('.imagem-completa');
     if (imagemCompleta) {
         
@@ -108,7 +121,7 @@ function reiniciarJogo() {
         puzzleGrid.style.gridTemplateRows = 'repeat(3, 1fr)';
         puzzleGrid.style.padding = '5px';
         
-        
+      
         for (let i = 0; i < 9; i++) {
             const dropZone = document.createElement('div');
             dropZone.className = 'drop-zone';
@@ -119,18 +132,18 @@ function reiniciarJogo() {
         
         const dropZones = puzzleGrid.querySelectorAll('.drop-zone');
         dropZones.forEach(zone => {
-            const piece = zone.querySelector('.puzzle-piece:not(.static-piece)');
-            if (piece) {
-                piece.remove();
-            }
+            zone.innerHTML = ''; 
         });
     }
     
+    
     const piecesContainer = document.getElementById('piecesContainer');
-    piecesContainer.querySelectorAll('.puzzle-piece').forEach(piece => {
-        piece.remove();
-    });
+    piecesContainer.innerHTML = '';
 
+
+    pecas = [];
+
+    escolherPecasEstaticas(); 
     criarPecas();
     embaralharPecas();
     jogoCompleto = false;
@@ -194,14 +207,13 @@ function configurarEventos() {
             const targetPosition = parseInt(target.dataset.position);
             const pieceCorrectPosition = parseInt(piece.dataset.originalPosition);
             
-            
+         
             if (target.querySelector('.puzzle-piece')) {
                 atualizarStatus("❌ Esse espaço já está ocupado!");
                 shakeAndReturn(piece, pecaOriginalParent);
                 return;
             }
-            
-         
+        
             if (pieceCorrectPosition === targetPosition) {
                 target.appendChild(piece);
                 piece.dataset.currentPosition = target.dataset.position;
@@ -237,7 +249,7 @@ function verificarVitoria() {
         atualizarStatus("🎉 Parabéns! Você completou o quebra-cabeça do Deku! 🎉");
         document.getElementById('status').classList.add('victory');
         
-  
+
         const pieces = document.querySelectorAll('.puzzle-piece');
         pieces.forEach((piece, index) => {
             setTimeout(() => {
@@ -261,17 +273,18 @@ function mostrarImagemCompleta() {
     const puzzleGrid = document.getElementById('puzzleGrid');
     const pieces = puzzleGrid.querySelectorAll('.puzzle-piece');
     
-
+    // Animação para peças desaparecerem
     pieces.forEach((piece, index) => {
         setTimeout(() => {
             piece.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
             piece.style.opacity = '0';
             piece.style.transform = 'scale(0.8)';
-        }, index * 50);
+        }, index * 50);  // Definindo o tempo de transição de cada peça
     });
     
-    
+    // Aguarda a animação de peças desaparecerem antes de adicionar a imagem
     setTimeout(() => {
+        // Limpa o grid e define a estrutura para a imagem completa
         puzzleGrid.innerHTML = '';
         puzzleGrid.style.gridTemplateColumns = '1fr';
         puzzleGrid.style.gridTemplateRows = '1fr';
@@ -290,9 +303,10 @@ function mostrarImagemCompleta() {
             box-shadow: 0 0 30px rgba(0, 255, 204, 0.6);
         `;
         
+        // Adiciona a imagem ao grid
         puzzleGrid.appendChild(imagemCompleta);
         
-     
+        // Adiciona animação para o fadeIn se ela não existir ainda
         if (!document.getElementById('fadeInAnimation')) {
             const style = document.createElement('style');
             style.id = 'fadeInAnimation';
@@ -310,7 +324,7 @@ function mostrarImagemCompleta() {
             `;
             document.head.appendChild(style);
         }
-    }, 800);
+    }, 1500);  // Aguarda 1.5 segundos para garantir que a animação de peças termine antes de mostrar a imagem
 }
 
 function atualizarStatus(mensagem) {
