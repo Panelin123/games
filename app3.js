@@ -275,17 +275,28 @@ function updateDisplay() {
     document.getElementById('length').textContent = gameState.snake.length;
 }
 
-// Controles do teclado
+
 document.addEventListener('keydown', (e) => {
+   
+   
+    if (gameState.isRunning || gameState.isPaused) {
+        
+        if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'KeyW', 'KeyA', 'KeyS', 'KeyD', 'Space'].includes(e.code)) {
+            e.preventDefault();
+        }
+    }
+    
+
     if (!gameState.isRunning || gameState.isPaused) {
         if (e.code === 'Space') {
-            e.preventDefault();
+            e.preventDefault(); 
             if (gameState.isPaused) {
                 resumeGame();
             } else if (!gameState.isRunning) {
                 startGame();
             }
         }
+        
         return;
     }
 
@@ -299,8 +310,8 @@ document.addEventListener('keydown', (e) => {
                 gameState.direction = { x: 0, y: -1 };
             }
             break;
-        case 'ArrowDown':
-        case 'KeyS':
+        case 'ArrowDown': 
+        case 'KeyS':      
             if (currentDir.y === 0) {
                 gameState.direction = { x: 0, y: 1 };
             }
@@ -316,10 +327,6 @@ document.addEventListener('keydown', (e) => {
             if (currentDir.x === 0) {
                 gameState.direction = { x: 1, y: 0 };
             }
-            break;
-        case 'Space':
-            e.preventDefault();
-            pauseGame();
             break;
     }
 });
