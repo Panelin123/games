@@ -77,22 +77,42 @@ body {
 }
 
 
-.buttons .btn {
+.buttons .btn,
+.buttons-jogo4 .btn {
   background-color: #00ffcc;
   font-family: 'Press Start 2P', monospace;
   color: #1a0033;
-  font-size: 0.5em; 
-  padding: 5px 10px; 
+  font-size: 0.5em;       /* menor fonte */
+  padding: 8px 12px;      /* menos padding */
   border: none;
   border-radius: 10px;
   cursor: pointer;
   transition: all 0.3s ease;
   margin: 20px 10px;
-  display: inline-block;
+  display: inline-flex;   /* flex para centralizar conteúdo */
+  align-items: center;
+  justify-content: center;
   text-decoration: none;
   box-shadow: 2px 2px 8px #000;
+  width: 140px;           
+  height: 40px;         
+  box-sizing: border-box;
 }
 
+.buttons .btn:hover,
+.buttons-jogo4 .btn:hover {
+  background-color: #cc66ff;
+  color: #fff;
+  transform: scale(1.1);
+  box-shadow: 0 0 12px #cc66ff;
+}
+
+.buttons .btn img,
+.buttons-jogo4 .btn img {
+  max-width: 90%;       
+  max-height: 70%;      
+  object-fit: contain;
+}
 
 .buttons .btn:hover {
   background-color: #cc66ff;
