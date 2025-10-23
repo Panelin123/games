@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap');
 
 body {
-    background: url('https://i.redd.it/bpxxqqvps4h91.gif') no-repeat center center fixed;
+    background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPsAAADJCAMAAADSHrQyAAAAA1BMVEX/aWIOYdmtAAAASElEQVR4nO3BMQEAAADCoPVPbQlPoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD+BsXcAAGLPH6gAAAAAElFTkSuQmCC') no-repeat center center fixed;
     background-size: cover;
     margin: 0;
     padding: 0;

@@ -1,10 +1,8 @@
 body {
-  background: url('https://i.pinimg.com/originals/b8/2f/28/b82f28a7e9c8fcb3868d3d94652c107c.gif') no-repeat center center;
+  background:url(https://preview.redd.it/riqhevhjktqy.jpg?auto=webp&s=4f8c8841abbc72fc64e6028752c5a1f87dd64132) no-repeat center center;
   background-size: cover; 
   min-height: 100vh; 
   margin: 0; 
-  color: #cc66ff;
-  box-shadow: 0 0 20px #cc66ff;
 }
 
 .mascote-container {
@@ -56,7 +54,7 @@ body {
 }
 
 .menu-btn {
-  background-color: #00ffcc; 
+  background-color: #3e75b3; 
   font-family: "Press Start 2P", monospace;
   color: #1a0033;
   font-size: 1.2em;
@@ -73,7 +71,7 @@ body {
 }
 
 .menu-btn:hover {
-  background-color: #cc66ff; 
+  background-color: #468cc4; 
   color: #fff;
   transform: scale(1.1);
   box-shadow: 0 0 10px #cc66ff;
@@ -84,21 +82,20 @@ body {
 }
 
 .forca-container {
-  
-    background-color: rgba(17, 17, 17, 0.8); 
-    color: #00ffcc;
-    max-width: 800px;
-    margin: 20px auto;
-    text-align: center;
-    border-radius: 15px;
-    box-shadow: 0 0 20px #00ffcc;
-    padding: 30px;
-    max-width: 600px;
-    margin: 50px auto;
-    text-align: center;
-    border-radius: 15px;
-    font-family: "Press Start 2P", monospace;
-    box-shadow: 0 0 20px #00ffcc;
+  background: rgba(62, 117, 179, 0.08);
+  backdrop-filter: blur(8px); 
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1); 
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2), 
+      inset 0 1px 0 rgba(255, 255, 255, 0.1), 
+      inset 0 -1px 0 rgba(0, 0, 0, 0.03); 
+  color: white;
+  max-width: 600px;
+  margin: 50px auto;
+  text-align: center;
+  border-radius: 15px;
+  padding: 30px;
+  font-family: "Press Start 2P", monospace;
 }
 
 @keyframes typing {
@@ -109,7 +106,7 @@ body {
 h1 {
   font-size: 3em;
   overflow: hidden; 
-  border-right: .1em solid #00ffcc; 
+  border-right: .1em solid #3e75b3; 
   white-space: nowrap; 
   width: 0; 
   animation: typing 3s steps(30) 1s forwards, blink 0.75s step-end infinite; 
@@ -132,8 +129,8 @@ h1 {
 #letra {
   font-family: "Press Start 2P", monospace;
   background-color: #000;
-  color: #00ffcc;
-  border: 2px solid #00ffcc;
+  color: #3e75b3;
+  border: 2px solid #3e75b3;
   padding: 10px;
   width: 50px;
   text-align: center;
@@ -143,7 +140,7 @@ h1 {
 
 button {
   font-family: "Press Start 2P", monospace;
-  background-color: #00ffcc;
+  background-color: #3e75b3;
   color: black;
   border: none;
   padding: 10px 20px;
@@ -154,7 +151,7 @@ button {
 }
 
 button:hover {
-  background-color: #00ccaa;
+  background-color: #3e75b3;
 }
 
 #letras-digitadas {
