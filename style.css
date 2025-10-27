@@ -9,7 +9,7 @@
 body {
   margin: 0;
   padding: 0;
-  background: url('https://i.pinimg.com/originals/42/45/54/42455498933d57e8af7156813472d0fa.gif') no-repeat center center fixed;
+  background: url('https://giffiles.alphacoders.com/214/214388.gif') no-repeat center center fixed;
   background-size: cover;
   font-family: 'Pixelify Sans', sans-serif;
 }
@@ -22,8 +22,7 @@ body {
   align-items: center;
   gap: 10px;
   padding: 10px 15px;
-  background: transparent; 
-  box-shadow: 0 0 15px 5px rgba(0,0,0,0.6);
+
   max-width: 320px;
   z-index: 1000;
 }

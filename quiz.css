@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap');
 
 body {
-    background: url('https://images8.alphacoders.com/555/thumb-1920-555236.jpg') no-repeat center center fixed;
+    background: url('https://st4.depositphotos.com/11660552/20288/v/450/depositphotos_202880138-stock-illustration-pixel-background-with-a-dark.jpg') no-repeat center center fixed;
     background-size: cover;
     margin: 0;
     padding: 0;
@@ -16,8 +16,6 @@ body {
     align-items: center;
     gap: 10px;
     padding: 10px 15px;
-    background: transparent; 
-    box-shadow: 0 0 15px 5px rgba(0,0,0,0.6);
     max-width: 320px;
     z-index: 1000;
   }
@@ -348,4 +346,5 @@ body {
   
   #playFallback:active {
     transform: scale(0.98);
+
   }

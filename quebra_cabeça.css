@@ -16,8 +16,6 @@ body {
     align-items: center;
     gap: 10px;
     padding: 10px 15px;
-    background: transparent; 
-    box-shadow: 0 0 15px 5px rgba(0,0,0,0.6);
     max-width: 320px;
     z-index: 1000;
 }
@@ -57,43 +55,44 @@ body {
 }
 
 .quebra_cabeca_container {
-    background-color: rgba(17, 17, 17, 0.8); 
-    color: #00ffcc;
+    background-color: rgba(17, 17, 17, 0.9);
+    color: #00ccaa;
     padding: 30px;
     max-width: 800px;
     margin: 20px auto;
     text-align: center;
     border-radius: 15px;
-    box-shadow: 0 0 20px #00ffcc;
+    border: 2px solid #00ccaa; 
 }
 
 .menu-btn {
-    background-color: #00ffcc; 
+    background-color: #009688; 
     font-family: "Press Start 2P", monospace;
-    color: #1a0033;
+    color:  #009688;
     font-size: 1.2em;
     padding: 15px 30px;
     border: none;
     border-radius: 10px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease;
     margin: 20px 10px;
-    position: fixed; 
-    bottom: 20px; 
-    left: 20px; 
-    z-index: 1001; 
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 1001;
+}
+.btn {
+    color: #111;
+    border: 2px solid #00bba0;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-family: "Press Start 2P", monospace;
+    font-size: 12px;
+    cursor: pointer;
+    margin: 0 10px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.menu-btn:hover {
-    background-color: #cc66ff; 
-    color: #fff;
-    transform: scale(1.1);
-    box-shadow: 0 0 10px #cc66ff;
-}
-
-.menu-btn:focus {
-    outline: none;
-}
 
 @keyframes typing {
     0% { width: 0; }
@@ -117,24 +116,26 @@ h1 {
 .titulo {
     font-size: 24px;
     margin-bottom: 30px;
-    text-shadow: 0 0 10px #00ffcc;
+    color: #00ccaa;
     font-family: "Press Start 2P", monospace;
+    text-shadow: none; 
 }
 
 h3 {
     font-family: "Press Start 2P", monospace;
     font-size: 14px;
     margin-bottom: 20px;
-    color: #cc66ff;
-    text-shadow: 0 0 8px #cc66ff;
+    color: #4cc5e0; 
+    text-shadow: none;
 }
 
 .controles {
     margin-bottom: 30px;
 }
 
+/*aqui é os botes*/
 .btn {
-    background: linear-gradient(45deg, #cc66ff, #00ffcc);
+    background-color: #0cbfad;
     color: #111;
     border: none;
     padding: 12px 24px;
@@ -172,10 +173,8 @@ h3 {
     grid-template-rows: repeat(3, 1fr);
     gap: 2px;
     background-color: #333;
-    border: 3px solid #00ffcc;
     border-radius: 10px;
     padding: 5px;
-    box-shadow: 0 0 15px rgba(0, 255, 204, 0.3);
 }
 
 .puzzle-piece {
@@ -213,7 +212,6 @@ h3 {
     transform: rotate(5deg);
 }
 
-/* ANIMAÇÃO DE BALANÇO QUANDO ERRO */
 @keyframes shake-wrong {
     0%, 100% { transform: translateX(0) rotate(0deg); }
     10% { transform: translateX(-8px) rotate(-4deg); }
@@ -233,7 +231,7 @@ h3 {
     box-shadow: 0 0 20px rgba(255, 68, 68, 0.6) !important;
 }
 
-/* ANIMAÇÃO DE RETORNO */
+
 @keyframes return-home {
     0% { 
         opacity: 0.7;
@@ -295,14 +293,13 @@ h3 {
     margin-top: 20px;
     font-size: 14px;
     font-family: "Press Start 2P", monospace;
-    color: #00ffcc;
-    text-shadow: 0 0 8px #00ffcc;
+    color: #00ccaa;
+    text-shadow: none;
 }
 
 .victory {
-    color: #00ff00 !important;
-    text-shadow: 0 0 15px #00ff00;
-    animation: pulse 1s infinite;
+    color: #00ff66 !important;
+    animation: none;
 }
 
 @keyframes pulse {

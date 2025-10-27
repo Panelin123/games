@@ -13,8 +13,7 @@ body {
   align-items: center;
   gap: 10px;
   padding: 10px 15px;
-  background: transparent; 
-  box-shadow: 0 0 15px 5px rgba(0,0,0,0.6);
+
   max-width: 320px;
   z-index: 1000;
 }
@@ -54,7 +53,7 @@ body {
 }
 
 .menu-btn {
-  background-color: #3e75b3; 
+  background-color: #009688; 
   font-family: "Press Start 2P", monospace;
   color: #1a0033;
   font-size: 1.2em;
@@ -71,7 +70,7 @@ body {
 }
 
 .menu-btn:hover {
-  background-color: #468cc4; 
+  background-color: #009688; 
   color: #fff;
   transform: scale(1.1);
   box-shadow: 0 0 10px #cc66ff;
@@ -82,20 +81,30 @@ body {
 }
 
 .forca-container {
-  background: rgba(62, 117, 179, 0.08);
-  backdrop-filter: blur(8px); 
-  -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.1); 
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2), 
-      inset 0 1px 0 rgba(255, 255, 255, 0.1), 
-      inset 0 -1px 0 rgba(0, 0, 0, 0.03); 
-  color: white;
+  background: rgba(30, 30, 30, 0.9); 
+  backdrop-filter: blur(12px); 
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2); 
+  box-shadow: 
+    0 8px 24px rgba(0, 0, 0, 0.4), 
+    inset 0 1px 0 rgba(255, 255, 255, 0.15), 
+    inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+  color: #f0f0f0; 
   max-width: 600px;
   margin: 50px auto;
   text-align: center;
   border-radius: 15px;
   padding: 30px;
   font-family: "Press Start 2P", monospace;
+  transition: all 0.3s ease;
+}
+
+
+.forca-container:hover {
+  box-shadow: 
+    0 12px 36px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.15);
 }
 
 @keyframes typing {
@@ -129,7 +138,7 @@ h1 {
 #letra {
   font-family: "Press Start 2P", monospace;
   background-color: #000;
-  color: #3e75b3;
+  color: #05e2ea;
   border: 2px solid #3e75b3;
   padding: 10px;
   width: 50px;
@@ -140,7 +149,7 @@ h1 {
 
 button {
   font-family: "Press Start 2P", monospace;
-  background-color: #3e75b3;
+  background-color: #009688;
   color: black;
   border: none;
   padding: 10px 20px;
@@ -151,7 +160,7 @@ button {
 }
 
 button:hover {
-  background-color: #3e75b3;
+  background-color: #07ae9e;
 }
 
 #letras-digitadas {

@@ -16,34 +16,32 @@ body {
     align-items: center;
     gap: 10px;
     padding: 10px 15px;
-    background: transparent; 
-    box-shadow: 0 0 15px 5px rgba(0,0,0,0.6);
     max-width: 320px;
     z-index: 1000;
-  }
-  
-  .mascote {
+}
+
+.mascote {
     width: 150px;
     height: 150px;
     filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.7));
     background: transparent;
-  }
-  
-  .balao-fala {
-    background: white;
-    border: 2px solid #000;
+}
+
+
+.balao-fala {
+    background: #fff; 
+    border: 2px solid #333; 
     border-radius: 15px;
     padding: 10px 15px;
     font-family: 'Press Start 2P', monospace;
     color: #1a0033;
     font-size: 0.9em;
-    box-shadow: 3px 3px 8px #000;
+    box-shadow: 2px 2px 4px rgba(0,0,0,0.3); 
     position: relative;
     max-width: 220px;
-  }
-  
-  
-  .balao-fala::after {
+}
+
+.balao-fala::after {
     content: '';
     position: absolute;
     bottom: 50%;
@@ -51,16 +49,17 @@ body {
     width: 0;
     height: 0;
     border: 12px solid transparent;
-    border-right-color: white;
+    border-right-color: #fff;
     border-left: 0;
     margin-top: -12px;
-    filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.4));
-  }
+    filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.2));
+}
 
-  .menu-btn {
-    background-color: #00ffcc; 
+
+.menu-btn {
+    background-color: #056854;
     font-family: "Press Start 2P", monospace;
-    color: #1a0033;
+    color: #f0f0f0;
     font-size: 1.2em;
     padding: 15px 30px;
     border: none;
@@ -75,26 +74,29 @@ body {
 }
 
 .menu-btn:hover {
-    background-color: #cc66ff; 
+    background-color: #22be90;
     color: #fff;
     transform: scale(1.1);
-    box-shadow: 0 0 10px #cc66ff;
+    box-shadow: 0 0 10px rgba(0,0,0,0.4); 
 }
 
 .menu-btn:focus {
     outline: none;
 }
 
+
 .memoria_container {
-    background-color: rgba(17, 17, 17, 0.8); 
-    color: #00ffcc;
+    background-color: rgba(17, 17, 17, 0.8);
+    color: #00ffcc; 
     padding: 30px;
     max-width: 800px;
     margin: 20px auto;
     text-align: center;
     border-radius: 15px;
-    box-shadow: 0 0 20px #00ffcc;
+    box-shadow: 0 0 20px rgba(0,255,204,0.4);
+    padding-bottom: 50px;
 }
+
 
 .memoria_container h1 {
     font-size: 30px;
@@ -118,10 +120,11 @@ h1 {
     50% { border-color: transparent; }
 }
 
+
 button {
-    background-color: #00ffcc;
+    background-color: #056854; 
     font-family: "Press Start 2P", monospace;
-    color: #1a0033;
+    color: #f0f0f0;
     font-size: 1.2em;
     padding: 15px 30px;
     border: none;
@@ -132,10 +135,10 @@ button {
 }
 
 button:hover {
-    background-color: #cc66ff;
+    background-color: #22be90; 
     color: #fff;
     transform: scale(1.1);
-    box-shadow: 0 0 10px #cc66ff;
+    box-shadow: 0 0 10px rgba(0,0,0,0.4); 
 }
 
 button:focus {
@@ -143,19 +146,19 @@ button:focus {
 }
 
 
-
 #game-board {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 15px;
+    gap: 10px;
     margin: 30px auto;
-    max-width: 600px;
+    max-width: 520px;
     padding: 20px;
 }
 
 .card {
-    width: 120px;
-    height: 120px;
+    width: 100%;
+    max-width: 110px;
+    height: 110px;
     background: linear-gradient(145deg, #666, #444);
     border: 3px solid #00ffcc;
     border-radius: 15px;
@@ -167,16 +170,17 @@ button:focus {
     position: relative;
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    margin: 0 auto;
 }
 
 .card:hover {
     transform: scale(1.05);
-    box-shadow: 0 0 15px #00ffcc;
+    box-shadow: 0 0 15px rgba(0, 255, 204, 0.3); 
 }
 
 .card.flipped {
     background: linear-gradient(145deg, #fff, #f0f0f0);
-    border-color: #cc66ff;
+    border-color: #333; 
 }
 
 .card.matched {
@@ -225,17 +229,12 @@ button:focus {
 }
 
 .score-item {
-    background-color: #333;
+    background-color: #333; 
     padding: 15px;
     border-radius: 10px;
-    border: 2px solid #00ffcc;
+    border: 2px solid #00ffcc; 
 }
 
-.current-player {
-    background-color: #cc66ff !important;
-    color: #fff !important;
-    animation: pulse 2s infinite;
-}
 
 @keyframes pulse {
     0% { transform: scale(1); }
@@ -246,7 +245,7 @@ button:focus {
 #game-status {
     font-size: 1.5em;
     margin: 20px 0;
-    color: #cc66ff;
+    color: #22be90; 
 }
 
 #playFallback {
@@ -254,7 +253,7 @@ button:focus {
     right: 18px;
     bottom: 18px;
     background: rgba(0,0,0,0.6);
-    color: white;
+    color: #f0f0f0;
     border: none;
     padding: 10px 14px;
     border-radius: 8px;
@@ -262,8 +261,126 @@ button:focus {
     cursor: pointer;
     display: none; 
     z-index: 9999;
-  }
+}
   
-  #playFallback:active {
+#playFallback:active {
     transform: scale(0.98);
-  }
+}
+
+/* Ajustes responsivos para telas menores */
+@media (max-height: 900px) {
+    .memoria_container h1 {
+        font-size: 24px;
+    }
+    
+    h1 {
+        font-size: 40px;
+    }
+    
+    #game-board {
+        gap: 8px;
+        max-width: 480px;
+        margin: 20px auto;
+        padding: 15px;
+    }
+    
+    .card {
+        max-width: 100px;
+        height: 100px;
+    }
+    
+    #scoreboard {
+        font-size: 1em;
+        gap: 15px;
+        margin: 15px auto;
+    }
+    
+    .score-item {
+        padding: 10px;
+    }
+    
+    #game-status {
+        font-size: 1.2em;
+        margin: 15px 0;
+    }
+}
+
+@media (max-height: 750px) {
+    .memoria_container {
+        padding: 20px;
+        margin: 10px auto;
+    }
+    
+    .memoria_container h1 {
+        font-size: 20px;
+    }
+    
+    h1 {
+        font-size: 32px;
+    }
+    
+    button {
+        font-size: 1em;
+        padding: 12px 24px;
+        margin: 15px 10px;
+    }
+    
+    #game-board {
+        gap: 6px;
+        max-width: 440px;
+        margin: 15px auto;
+        padding: 10px;
+    }
+    
+    .card {
+        max-width: 90px;
+        height: 90px;
+    }
+    
+    #scoreboard {
+        font-size: 0.9em;
+        gap: 10px;
+        margin: 10px auto;
+    }
+    
+    .score-item {
+        padding: 8px;
+    }
+    
+    #game-status {
+        font-size: 1em;
+        margin: 10px 0;
+    }
+}
+
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+#game-status {
+    font-size: 1.5em;
+    margin: 20px 0;
+    color: #22be90; 
+}
+
+#playFallback {
+    position: fixed;
+    right: 18px;
+    bottom: 18px;
+    background: rgba(0,0,0,0.6);
+    color: #f0f0f0;
+    border: none;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    display: none; 
+    z-index: 9999;
+}
+  
+#playFallback:active {
+    transform: scale(0.98);
+}
