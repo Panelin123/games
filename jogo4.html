@@ -8,7 +8,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
 </head>
 <body>
-    <button class="btn menu-btn" onclick="window.location.href='menu.html'"> Menu</button>
     <div class="mascote-container">
       <img src="img/image-removebg-preview.png" alt="Mascote" class="mascote" />
       <div class="balao-fala">
@@ -37,7 +36,6 @@
         <canvas id="gameCanvas" class="game-canvas" width="400" height="400"></canvas>
 
         <div class="controls">
-            <button class="btn btn-start" id="startBtn" onclick="startGame()">▶️ Iniciar</button>
             <button class="btn btn-pause" id="pauseBtn" onclick="pauseGame()" disabled>⏸️ Pausar</button>
             <button class="btn btn-restart" onclick="restartGame()">🔄 Reiniciar</button>
         </div>
@@ -58,6 +56,8 @@
             </h2>
             <div class="final-score" id="finalScore">Pontuação Final: 0</div>
             <button class="btn btn-restart" onclick="restartGame()">🔄 Jogar Novamente</button>
+            <button class="btn game-over-btn" id="returnMenuBtn" onclick="returnToMenu()">🏠 Retornar ao Menu</button>
+
         </div>
     </div>
 

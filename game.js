@@ -1,4 +1,4 @@
-// === CONFIGURAÇÕES INICIAIS DO JOGO ===
+
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 canvas.width = window.innerWidth;
@@ -8,30 +8,30 @@ let lastTime = 0;
 let gameTime = 0;
 let keys = {};
 
-// Adicionando evento para capturar as teclas pressionadas
+
 window.addEventListener("keydown", (e) => keys[e.key] = true);
 window.addEventListener("keyup", (e) => keys[e.key] = false);
 
-// === PERSONAGEM ===
+
 let player = {
     x: canvas.width / 2,
     y: canvas.height / 2,
     width: 50,
     height: 50,
-    speed: 5,
+    speed: 7,
     vx: 0,
     vy: 0,
     jumpSpeed: -10,
     gravity: 0.5,
     onGround: false,
     canFly: true,
-    flyDuration: 3000, // 3 segundos de voo
+    flyDuration: 3000,
     flyingTime: 0,
     isFlying: false,
     health: 100
 };
 
-// Função de atualização do jogador
+
 function updatePlayer(deltaTime) {
     if (keys["ArrowLeft"]) player.vx = -player.speed;
     else if (keys["ArrowRight"]) player.vx = player.speed;
@@ -59,23 +59,23 @@ function updatePlayer(deltaTime) {
     player.y += player.vy;
 }
 
-// Função de renderização do jogador
+
 function drawPlayer() {
     ctx.fillStyle = "#ff0000";
     ctx.fillRect(player.x, player.y, player.width, player.height);
 }
 
-// === ESPADA (ATAQUE) ===
+
 let sword = {
     width: 30,
     height: 10,
     damage: 3,
     isAttacking: false,
-    attackDuration: 200, // 200ms de ataque
+    attackDuration: 200, 
     attackTime: 0
 };
 
-// Função de ataque
+
 function updateSword(deltaTime) {
     if (keys["a"] && !sword.isAttacking) {
         sword.isAttacking = true;
@@ -83,7 +83,7 @@ function updateSword(deltaTime) {
     }
 
     if (sword.isAttacking && gameTime - sword.attackTime <= sword.attackDuration) {
-        // Verificar colisão com inimigos aqui
+       
     } else {
         sword.isAttacking = false;
     }
