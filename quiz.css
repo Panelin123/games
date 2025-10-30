@@ -133,8 +133,8 @@ body {
 }
 
 .mascote {
-    width: 80px;
-    height: 80px;
+    width: 100px;
+    height: 100px;
     filter: drop-shadow(2px 2px 3px rgba(0,0,0,0.7));
 }
 
