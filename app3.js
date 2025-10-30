@@ -11,26 +11,68 @@ let gameState = {
     snake: [{ x: 10, y: 10 }],
     direction: { x: 1, y: 0 },
     food: { x: 15, y: 15 },
+    food2: null, 
     score: 0,
     highScore: localStorage.getItem('snakeHighScore') || 0,
     isRunning: false,
     isPaused: false,
     gameLoop: null,
-    speed: 100
+    speed: 150,
+    difficulty: null,
+    difficultyName: '-'
+};
+
+const difficultySettings = {
+    easy: {
+        speed: 150,
+        name: 'Fácil',
+        hasTwoFruits: false
+    },
+    medium: {
+        speed: 100,
+        name: 'Médio',
+        hasTwoFruits: false
+    },
+    hard: {
+        speed: 70,
+        name: 'Difícil',
+        hasTwoFruits: true
+    }
 };
 
 const colors = {
     snake: '#4caf50',
     snakeHead: '#2e7d32',
     food: '#ff5722',
+    food2: '#ff9800', 
     background: '#1a1a2e',
     grid: 'rgba(255,255,255,0.1)'
 };
 
+function selectDifficulty(level) {
+    gameState.difficulty = level;
+    gameState.speed = difficultySettings[level].speed;
+    gameState.difficultyName = difficultySettings[level].name;
+    
+    
+    document.getElementById('difficultyOverlay').style.display = 'none';
+    
+   
+    if (difficultySettings[level].hasTwoFruits) {
+        generateSecondFood();
+    } else {
+        gameState.food2 = null;
+    }
+    
+    updateDisplay();
+    startCountdown();
+}
+
 function initGame() {
     updateDisplay();
     drawGame();
-    startCountdown(); 
+    
+    document.getElementById('difficultyOverlay').style.display = 'flex';
 }
 
 function drawGame() {
@@ -39,6 +81,9 @@ function drawGame() {
     drawGrid();
     drawSnake();
     drawFood();
+    if (gameState.food2) {
+        drawSecondFood();
+    }
 }
 
 function drawGrid() {
@@ -87,6 +132,17 @@ function drawFood() {
     ctx.fillRect(x + 6, y + 6, 8, 8);
 }
 
+function drawSecondFood() {
+    if (!gameState.food2) return;
+    const x = gameState.food2.x * GRID_SIZE;
+    const y = gameState.food2.y * GRID_SIZE;
+    const pulse = 2 + Math.sin(Date.now() * 0.015);
+    ctx.fillStyle = colors.food2;
+    ctx.fillRect(x + pulse, y + pulse, GRID_SIZE - pulse * 2, GRID_SIZE - pulse * 2);
+    ctx.fillStyle = '#ffd54f';
+    ctx.fillRect(x + 6, y + 6, 8, 8);
+}
+
 function moveSnake() {
     const head = { ...gameState.snake[0] };
     head.x += gameState.direction.x;
@@ -98,10 +154,18 @@ function moveSnake() {
     }
 
     gameState.snake.unshift(head);
+    
+    
     if (head.x === gameState.food.x && head.y === gameState.food.y) {
         gameState.score += 10;
         generateFood();
-        createParticles(head.x * GRID_SIZE, head.y * GRID_SIZE);
+        createParticles(head.x * GRID_SIZE, head.y * GRID_SIZE, colors.food);
+    }
+    
+    else if (gameState.food2 && head.x === gameState.food2.x && head.y === gameState.food2.y) {
+        gameState.score += 15; 
+        generateSecondFood();
+        createParticles(head.x * GRID_SIZE, head.y * GRID_SIZE, colors.food2);
     } else {
         gameState.snake.pop();
     }
@@ -114,10 +178,23 @@ function generateFood() {
             x: Math.floor(Math.random() * GRID_WIDTH),
             y: Math.floor(Math.random() * GRID_HEIGHT)
         };
-    } while (gameState.snake.some(s => s.x === gameState.food.x && s.y === gameState.food.y));
+    } while (gameState.snake.some(s => s.x === gameState.food.x && s.y === gameState.food.y) ||
+             (gameState.food2 && gameState.food.x === gameState.food2.x && gameState.food.y === gameState.food2.y));
 }
 
-function createParticles(x, y) {
+function generateSecondFood() {
+    if (!difficultySettings[gameState.difficulty].hasTwoFruits) return;
+    
+    do {
+        gameState.food2 = {
+            x: Math.floor(Math.random() * GRID_WIDTH),
+            y: Math.floor(Math.random() * GRID_HEIGHT)
+        };
+    } while (gameState.snake.some(s => s.x === gameState.food2.x && s.y === gameState.food2.y) ||
+             (gameState.food.x === gameState.food2.x && gameState.food.y === gameState.food2.y));
+}
+
+function createParticles(x, y, color) {
     for (let i = 0; i < 8; i++) {
         const p = document.createElement('div');
         p.style.position = 'fixed';
@@ -125,7 +202,7 @@ function createParticles(x, y) {
         p.style.top = (canvas.offsetTop + y + 10) + 'px';
         p.style.width = '4px';
         p.style.height = '4px';
-        p.style.background = '#ffeb3b';
+        p.style.background = color || '#ffeb3b';
         p.style.borderRadius = '50%';
         p.style.pointerEvents = 'none';
         p.style.zIndex = '1000';
@@ -174,6 +251,7 @@ function startCountdown() {
 function startGame() {
     gameState.isRunning = true;
     gameState.isPaused = false;
+    document.getElementById('pauseBtn').disabled = false;
     gameState.gameLoop = setInterval(gameLoop, gameState.speed);
 }
 
@@ -192,6 +270,7 @@ function resumeGame() {
 function gameOver() {
     gameState.isRunning = false;
     clearInterval(gameState.gameLoop);
+    document.getElementById('pauseBtn').disabled = true;
 
     if (gameState.score > gameState.highScore) {
         gameState.highScore = gameState.score;
@@ -208,24 +287,30 @@ function restartGame() {
         snake: [{ x: 10, y: 10 }],
         direction: { x: 1, y: 0 },
         food: { x: 15, y: 15 },
+        food2: null,
         score: 0,
         highScore: gameState.highScore,
         isRunning: false,
         isPaused: false,
         gameLoop: null,
-        speed: 150
+        speed: 150,
+        difficulty: null,
+        difficultyName: '-'
     };
     document.getElementById('gameOverModal').style.display = 'none';
+    document.getElementById('pauseBtn').disabled = true;
     generateFood();
     updateDisplay();
     drawGame();
-    startCountdown();
+   
+    document.getElementById('difficultyOverlay').style.display = 'flex';
 }
 
 function updateDisplay() {
     document.getElementById('score').textContent = gameState.score;
     document.getElementById('highScore').textContent = gameState.highScore;
     document.getElementById('length').textContent = gameState.snake.length;
+    document.getElementById('difficulty').textContent = gameState.difficultyName;
 }
 
 function returnToMenu() {
@@ -244,6 +329,7 @@ document.addEventListener('keydown', e => {
         case 'KeyA': if (d.x === 0) gameState.direction = { x: -1, y: 0 }; break;
         case 'ArrowRight':
         case 'KeyD': if (d.x === 0) gameState.direction = { x: 1, y: 0 }; break;
+        case 'Space': pauseGame(); break;
     }
 });
 

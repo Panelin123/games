@@ -15,6 +15,26 @@
       </div>
     </div>
 
+    <div class="difficulty-overlay" id="difficultyOverlay">
+        <div class="difficulty-content">
+            <h2 class="difficulty-title">Escolha a Dificuldade</h2>
+            <div class="difficulty-buttons">
+                <button class="btn-difficulty btn-easy" onclick="selectDifficulty('easy')">
+                    🟢 Fácil
+                    <span class="difficulty-desc">Velocidade Normal</span>
+                </button>
+                <button class="btn-difficulty btn-medium" onclick="selectDifficulty('medium')">
+                    🟡 Médio
+                    <span class="difficulty-desc">Velocidade Rápida</span>
+                </button>
+                <button class="btn-difficulty btn-hard" onclick="selectDifficulty('hard')">
+                    🔴 Difícil
+                    <span class="difficulty-desc">Muito Rápido + 2 Frutas</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
     <div class="game-container">
         <h1 class="game-title">🐍 Jogo da Cobrinha 🐍</h1>
         
@@ -30,6 +50,10 @@
             <div class="score-display">
                 <div class="score-label">Tamanho</div>
                 <div class="score-value" id="length">1</div>
+            </div>
+            <div class="score-display">
+                <div class="score-label">Dificuldade</div>
+                <div class="score-value" id="difficulty">-</div>
             </div>
         </div>
 
@@ -57,45 +81,48 @@
             <div class="final-score" id="finalScore">Pontuação Final: 0</div>
             <button class="btn btn-restart" onclick="restartGame()">🔄 Jogar Novamente</button>
             <button class="btn game-over-btn" id="returnMenuBtn" onclick="returnToMenu()">🏠 Retornar ao Menu</button>
-
         </div>
     </div>
 
     <button id="playFallback" aria-label="Ativar som">Ativar som</button>
 
-  <script>
-    (function() {
-      const audio = document.getElementById('bgAudio');
-      const fallback = document.getElementById('playFallback');
+    <script>
+        (function() {
+            const audio = document.getElementById('bgAudio');
+            const fallback = document.getElementById('playFallback');
 
-      function tryAutoplay() {
-        audio.play().then(() => {
-          console.log('Áudio tocando automaticamente');
-        }).catch((err) => {
-          console.warn('Autoplay bloqueado:', err);
-          fallback.style.display = 'block';
-        });
-      }
+            function tryAutoplay() {
+                if (audio) {
+                    audio.play().then(() => {
+                        console.log('Áudio tocando automaticamente');
+                    }).catch((err) => {
+                        console.warn('Autoplay bloqueado:', err);
+                        fallback.style.display = 'block';
+                    });
+                }
+            }
 
-      fallback.addEventListener('click', function() {
-        audio.play().then(() => {
-          fallback.style.display = 'none';
-        }).catch((e) => {
-          console.error('Erro ao iniciar áudio após clique:', e);
-        });
-      });
+            fallback.addEventListener('click', function() {
+                if (audio) {
+                    audio.play().then(() => {
+                        fallback.style.display = 'none';
+                    }).catch((e) => {
+                        console.error('Erro ao iniciar áudio após clique:', e);
+                    });
+                }
+            });
 
-      document.addEventListener('DOMContentLoaded', tryAutoplay);
+            document.addEventListener('DOMContentLoaded', tryAutoplay);
 
-      function unlockOnFirstInteraction() {
-        audio.play().catch(()=>{});
-        document.removeEventListener('click', unlockOnFirstInteraction);
-        document.removeEventListener('touchstart', unlockOnFirstInteraction);
-      }
-      document.addEventListener('click', unlockOnFirstInteraction);
-      document.addEventListener('touchstart', unlockOnFirstInteraction);
-    })();
-  </script>
+            function unlockOnFirstInteraction() {
+                if (audio) audio.play().catch(()=>{});
+                document.removeEventListener('click', unlockOnFirstInteraction);
+                document.removeEventListener('touchstart', unlockOnFirstInteraction);
+            }
+            document.addEventListener('click', unlockOnFirstInteraction);
+            document.addEventListener('touchstart', unlockOnFirstInteraction);
+        })();
+    </script>
     <script src="app3.js"></script>
 </body>
 </html>
