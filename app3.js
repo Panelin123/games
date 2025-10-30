@@ -16,7 +16,7 @@ let gameState = {
     isRunning: false,
     isPaused: false,
     gameLoop: null,
-    speed: 175
+    speed: 100
 };
 
 const colors = {
@@ -156,9 +156,9 @@ function gameLoop() {
 function startCountdown() {
     const overlay = document.createElement('div');
     overlay.id = 'countdownOverlay';
-    overlay.innerHTML = `<div class="countdown-content"><h2 id="countdownText">O jogo começará em 5...</h2></div>`;
+    overlay.innerHTML = `<div class="countdown-content"><h2 id="countdownText">O jogo começará em 3...</h2></div>`;
     document.body.appendChild(overlay);
-    let c = 5;
+    let c = 3;
     const txt = document.getElementById('countdownText');
     const timer = setInterval(() => {
         c--;

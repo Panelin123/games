@@ -124,26 +124,30 @@ h1 {
   animation: blink 2s infinite;
   display: inline-block;
 }
-
 .buttons {
-  margin-top: -190px;
-  margin-left: -650px;
+  margin-top: -230px;   
+  margin-left: -600px;  
 }
 
 .buttons .btn {
   background-color: #11af8f;
   font-family: 'Press Start 2P', monospace;
   color: #1a0033;
-  font-size: 0.6em;
-  padding: 10px 15px;
+  font-size: 0.5em;       
+  padding: 8px 12px;       
   border: none;
-  border-radius: 10px;
+  border-radius: 8px;
   cursor: pointer;
   transition: all 0.3s ease;
-  margin: 20px 10px;
-  display: inline-block;
+  margin: 45px 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   text-decoration: none;
   box-shadow: 2px 2px 8px #000;
+  width: 140px;          
+  height: 60px;           
+  box-sizing: border-box;
 }
 
 .buttons .btn:hover {
@@ -175,8 +179,8 @@ h1 {
   justify-content: center;
   text-decoration: none;
   box-shadow: 2px 2px 8px #000;
-  width: 180px;   
-  height: 130px;  
+  width: 140px;   
+  height: 60px;  
 }
 
 .buttons-jogo4 .btn:hover {
@@ -211,3 +215,4 @@ h1 {
 #playFallback:active {
   transform: scale(0.98);
 }
+
