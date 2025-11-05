@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo dos 7 Erros</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Imagens escondidas para pré-carregamento -->
+    <div style="display: none;">
+        <!-- FÁCIL -->
+        <img id="img-facil-1" src="img/cascãocerto.png" alt="">
+        <img id="img-facil-2" src="img/cascaoerrado.png" alt="">
+        
+        <!-- MÉDIO -->
+        <img id="img-medio-1" src="img/nevecerta.png" alt="">
+        <img id="img-medio-2" src="img/neveerrada.png" alt="">
+        
+        <!-- DIFÍCIL -->
+        <img id="img-dificil-1" src="img/quartocerto.png" alt="">
+        <img id="img-dificil-2" src="img/quartoerrado.png" alt="">
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <h1>🔍 Jogo dos 7 Erros</h1>
+            <div class="info">
+                <div class="info-item">
+                    <span class="label">Dificuldade:</span>
+                    <span id="dificuldade-display">-</span>
+                </div>
+                <div class="info-item">
+                    <span class="label">Erros encontrados:</span>
+                    <span id="erros">0/7</span>
+                </div>
+                <div class="info-item">
+                    <span class="label">Tempo:</span>
+                    <span id="timer">00:00</span>
+                </div>
+                <div class="info-item">
+                    <span class="label">Pontuação:</span>
+                    <span id="pontuacao">0</span>
+                </div>
+            </div>
+        </div>
+
+        <div id="tela-inicio" class="tela-inicio">
+            <h2>Bem-vindo ao Jogo dos 7 Erros!</h2>
+            <p>Encontre as 7 diferenças entre as duas imagens.</p>
+            <p>Escolha sua dificuldade e comece a jogar!</p>
+            
+            <div class="seletor-dificuldade">
+                <h3>Escolha a Dificuldade:</h3>
+                <div class="botoes-dificuldade">
+                    <button class="btn-dificuldade btn-facil" data-dificuldade="facil">
+                        <span class="icone">😊</span>
+                        <span class="titulo">FÁCIL</span>
+                        <span class="descricao">Diferenças mais óbvias</span>
+                    </button>
+                    <button class="btn-dificuldade btn-medio" data-dificuldade="medio">
+                        <span class="icone">🤔</span>
+                        <span class="titulo">MÉDIO</span>
+                        <span class="descricao">Desafio equilibrado</span>
+                    </button>
+                    <button class="btn-dificuldade btn-dificil" data-dificuldade="dificil">
+                        <span class="icone">😎</span>
+                        <span class="titulo">DIFÍCIL</span>
+                        <span class="descricao">Para experts!</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="jogo" class="jogo" style="display: none;">
+            <div class="imagens-container">
+                <div class="imagem-wrapper">
+                    <h3>Imagem Original</h3>
+                    <canvas id="canvas1"></canvas>
+                </div>
+                <div class="imagem-wrapper">
+                    <h3>Encontre as diferenças</h3>
+                    <canvas id="canvas2"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div id="tela-resultado" class="tela-resultado" style="display: none;">
+            <h2 id="titulo-resultado"></h2>
+            <div class="resultado-info">
+                <p>Tempo: <span id="tempo-final"></span></p>
+                <p>Pontuação: <span id="pontos-fase"></span></p>
+            </div>
+            <button id="btn-proxima" class="btn">Próxima Dificuldade</button>
+            <button id="btn-menu" class="btn btn-secondary">Voltar ao Menu</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
