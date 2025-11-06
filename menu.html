@@ -1,70 +1,196 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Menu de Jogos</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Menu de Jogos</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="mascote-container">
-    <img src="img/image-removebg-preview.png" alt="Mascote" class="mascote" />
-    <div class="balao-fala">
-      Seja bem-vindo ao Anti-Wifi, aqui você pode jogar jogos sem internet. 
-      Eu sou Mono e serei seu guia pelos jogos!
-    </div>
-  </div>
+    <div id="modal-registro" class="modal">
+    <div class="modal-content">
+      <h2>Insira suas Iniciais (3 Caracteres)</h2>
+      <form id="form-registro">
+        <input type="text" id="username-input" maxlength="3" required pattern="[A-Za-z0-9!@#$&*]{3}" title="Apenas 3 caracteres alfanuméricos ou símbolos (!@#$&*)" placeholder="Ex: ABC">
+        <button type="submit">Registrar</button>
+      </form>
+    </div>
+  </div>
 
-  <div class="menu-container">
-    <audio id="bgAudio" src="AUD-20250922-WA0027.mp3" preload="auto" loop playsinline></audio>
+  <div class="mascote-container">
+    <img src="img/image-removebg-preview.png" alt="Mascote" class="mascote" />
+    <div id="balao-fala" class="balao-fala">
+            Seja bem-vindo ao Anti-Wifi, aqui você pode jogar jogos sem internet. 
+      Eu sou Mono e serei seu guia pelos jogos!
+    </div>
+  </div>
 
-    <div class="buttons">
-      <a href="jogo1.html" class="btn"> forca</a>
-      <a href="7erros.html" class="btn"> 7 Erros</a>
-      <a href="jogo2.html" class="btn">quebra-cabeça</a>
-      <a href="jogo3.html" class="btn">jogo da memória</a>
-    </div>
-    
-    <div class="buttons-jogo4">
-      <a href="jogo4.html" class="btn">cobrinha</a>
-    </div>
-  </div>
+  <div class="menu-container">
+    <audio id="bgAudio" src="AUD-20250922-WA0027.mp3" preload="auto" loop playsinline></audio>
 
- 
-  <button id="playFallback" aria-label="Ativar som">Ativar som</button>
+    <div id="user-info">
+        <h1 id="user-display">Usuário: N/A</h1> 
+        <button id="btn-logout" class="arcade-button">SAIR</button>
+    </div>
+        <div class="buttons">
+      <a href="jogo1.html" class="btn"> forca</a>
+      <a href="jogo2.html" class="btn">quebra-cabeça</a>
+      <a href="jogo3.html" class="btn">jogo da memória</a>
+    </div>
+    
+    <div class="buttons-jogo4">
+      <a href="jogo4.html" class="btn">cobrinha</a>
+    </div>
+  </div>
 
-  <script>
-    (function() {
-      const audio = document.getElementById('bgAudio');
-      const fallback = document.getElementById('playFallback');
+    <div class="placar-container">
+    <h3>🏆 High Scores (Total Acumulado) 🏆</h3> 
+    <table id="placar-tabela">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Iniciais</th>
+          <th>Total Acumulado</th> 
+        </tr>
+      </thead>
+      <tbody id="placar-corpo">
+              </tbody>
+    </table>
+  </div>
 
-      function tryAutoplay() {
-        audio.play().then(() => {
-          console.log('Áudio tocando automaticamente');
-        }).catch((err) => {
-          console.warn('Autoplay bloqueado:', err);
-          fallback.style.display = 'block';
-        });
-      }
+  <button id="playFallback" aria-label="Ativar som">Ativar som</button>
 
-      fallback.addEventListener('click', function() {
-        audio.play().then(() => {
-          fallback.style.display = 'none';
-        }).catch((e) => {
-          console.error('Erro ao iniciar áudio após clique:', e);
-        });
-      });
+    <script>
+    // SEU SCRIPT DE ÁUDIO EXISTENTE AQUI...
+    (function() {
+      const audio = document.getElementById('bgAudio');
+      const fallback = document.getElementById('playFallback');
 
-      document.addEventListener('DOMContentLoaded', tryAutoplay);
+      function tryAutoplay() {
+        audio.play().then(() => {
+          console.log('Áudio tocando automaticamente');
+        }).catch((err) => {
+          console.warn('Autoplay bloqueado:', err);
+          fallback.style.display = 'block';
+        });
+      }
 
-      function unlockOnFirstInteraction() {
-        audio.play().catch(()=>{});
-        document.removeEventListener('click', unlockOnFirstInteraction);
-        document.removeEventListener('touchstart', unlockOnFirstInteraction);
-      }
-      document.addEventListener('click', unlockOnFirstInteraction);
-      document.addEventListener('touchstart', unlockOnFirstInteraction);
-    })();
-  </script>
+      fallback.addEventListener('click', function() {
+        audio.play().then(() => {
+          fallback.style.display = 'none';
+        }).catch((e) => {
+          console.error('Erro ao iniciar áudio após clique:', e);
+        });
+      });
+
+      document.addEventListener('DOMContentLoaded', tryAutoplay);
+
+      function unlockOnFirstInteraction() {
+        audio.play().catch(()=>{});
+        document.removeEventListener('click', unlockOnFirstInteraction);
+        document.removeEventListener('touchstart', unlockOnFirstInteraction);
+      }
+      document.addEventListener('click', unlockOnFirstInteraction);
+      document.addEventListener('touchstart', unlockOnFirstInteraction);
+    })();
+
+    // --- SCRIPT: REGISTRO, PLACAR E LOGOUT ---
+    const MODAL = document.getElementById('modal-registro');
+    const FORM = document.getElementById('form-registro');
+    const INPUT = document.getElementById('username-input');
+    const USER_DISPLAY = document.getElementById('user-display');
+    const PLACAR_CORPO = document.getElementById('placar-corpo');
+    const BALAO_FALA = document.getElementById('balao-fala');
+    const BTN_LOGOUT = document.getElementById('btn-logout'); 
+    const USER_INFO = document.getElementById('user-info');
+
+    const SESSION_KEY = 'currentUserInitials';
+    // CHAVE CORRIGIDA: Agora aponta para a pontuação TOTAL acumulada
+    const SCORE_KEY_TOTAL = 'arcadeTotalScores'; 
+    // Chave antiga (mantida para referência, mas não usada para o placar principal)
+    const SCORE_KEY_LEGACY = 'arcadeHighScores'; 
+
+    // Função para carregar e exibir o placar (agora carregando o TOTAL)
+    function renderPlacar() {
+      // Pega o placar do localStorage (agora o total)
+      const scores = JSON.parse(localStorage.getItem(SCORE_KEY_TOTAL) || '[]');
+      
+      // Ordena por pontuação (maior primeiro)
+      scores.sort((a, b) => b.score - a.score);
+      
+      PLACAR_CORPO.innerHTML = '';
+      
+      // Limita a 10 registros
+      scores.slice(0, 10).forEach((entry, index) => {
+        const row = PLACAR_CORPO.insertRow();
+        row.insertCell().textContent = index + 1;
+        row.insertCell().textContent = entry.user.toUpperCase();
+        // Garante que a pontuação é exibida
+        row.insertCell().textContent = entry.score; 
+      });
+    }
+
+    // Função para atualizar a visualização do usuário logado
+    function updateSessionDisplay() {
+      const currentUser = sessionStorage.getItem(SESSION_KEY);
+      
+      if (currentUser) {
+        USER_DISPLAY.textContent = `Usuário: ${currentUser.toUpperCase()}`;
+        BALAO_FALA.textContent = `Olá, ${currentUser.toUpperCase()}! Escolha um jogo para começar a diversão!`;
+        MODAL.style.display = 'none'; 
+        BTN_LOGOUT.style.display = 'inline-block'; 
+      } else {
+        USER_DISPLAY.textContent = `Usuário: N/A`;
+        BALAO_FALA.textContent = `Por favor, registre suas iniciais para começar a jogar e entrar no placar High Score!`;
+        MODAL.style.display = 'flex'; 
+        BTN_LOGOUT.style.display = 'none'; 
+      }
+    }
+
+    // Função de Logout
+    function handleLogout() {
+        const currentUser = sessionStorage.getItem(SESSION_KEY);
+        
+        if (currentUser) {
+            sessionStorage.removeItem(SESSION_KEY);
+            alert(`Usuário ${currentUser.toUpperCase()} desconectado. Registre o próximo jogador!`);
+        }
+        
+        updateSessionDisplay();
+        renderPlacar();
+    }
+    
+    // Lógica de submissão do formulário
+    FORM.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const initials = INPUT.value.toUpperCase();
+      
+      if (initials.length === 3) {
+        sessionStorage.setItem(SESSION_KEY, initials);
+        
+        // Garante que o usuário existe no placar TOTAL (localStorage) com pontuação 0
+        const scores = JSON.parse(localStorage.getItem(SCORE_KEY_TOTAL) || '[]');
+        
+        if (!scores.find(s => s.user === initials)) {
+          scores.push({ user: initials, score: 0 });
+          localStorage.setItem(SCORE_KEY_TOTAL, JSON.stringify(scores));
+        }
+        
+        updateSessionDisplay();
+        renderPlacar();
+      } else {
+        alert('As iniciais devem ter exatamente 3 caracteres!');
+      }
+    });
+    
+    // Event Listener: Botão de Sair
+    BTN_LOGOUT.addEventListener('click', handleLogout);
+
+    // Inicializa o sistema ao carregar a página
+    document.addEventListener('DOMContentLoaded', function() {
+      updateSessionDisplay();
+      renderPlacar();
+    });
+  </script>
 </body>
 </html>

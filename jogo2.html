@@ -14,6 +14,9 @@
         <h1 class="titulo">🧩 Quebra-Cabeça 🧩</h1>
         <audio id="bgAudio" src="AUD-20250922-WA0027.mp3" preload="auto" loop playsinline></audio>
         
+        <div id="placar-local" class="score-display">
+            </div>
+        <div id="timer-display" class="timer-display">Tempo: 00:00</div>
         <div class="controles">
             <button class="btn" onclick="embaralharPecas()">🎲 Embaralhar</button>
             <button class="btn" onclick="reiniciarJogo()">🔄 Reiniciar</button>
@@ -58,43 +61,44 @@
     <div class="mascote-container">
         <img src="img/image-removebg-preview.png" alt="Mascote" class="mascote" />
         <div class="balao-fala">
-          Nesse jogo temos que organizar os números na ordem correta, acha que consegue?
+            Nesse jogo temos que organizar os números na ordem correta, acha que consegue?
         </div>
     </div>
 
     <button id="playFallback" aria-label="Ativar som">Ativar som</button>
 
     <script>
+        // (Seu código de áudio)
         (function() {
-          const audio = document.getElementById('bgAudio');
-          const fallback = document.getElementById('playFallback');
-    
-          function tryAutoplay() {
-            audio.play().then(() => {
-              console.log('Áudio tocando automaticamente');
-            }).catch((err) => {
-              console.warn('Autoplay bloqueado:', err);
-              fallback.style.display = 'block';
+            const audio = document.getElementById('bgAudio');
+            const fallback = document.getElementById('playFallback');
+        
+            function tryAutoplay() {
+              audio.play().then(() => {
+                console.log('Áudio tocando automaticamente');
+              }).catch((err) => {
+                console.warn('Autoplay bloqueado:', err);
+                fallback.style.display = 'block';
+              });
+            }
+        
+            fallback.addEventListener('click', function() {
+              audio.play().then(() => {
+                fallback.style.display = 'none';
+              }).catch((e) => {
+                console.error('Erro ao iniciar áudio após clique:', e);
+              });
             });
-          }
-    
-          fallback.addEventListener('click', function() {
-            audio.play().then(() => {
-              fallback.style.display = 'none';
-            }).catch((e) => {
-              console.error('Erro ao iniciar áudio após clique:', e);
-            });
-          });
-    
-          document.addEventListener('DOMContentLoaded', tryAutoplay);
-    
-          function unlockOnFirstInteraction() {
-            audio.play().catch(()=>{});
-            document.removeEventListener('click', unlockOnFirstInteraction);
-            document.removeEventListener('touchstart', unlockOnFirstInteraction);
-          }
-          document.addEventListener('click', unlockOnFirstInteraction);
-          document.addEventListener('touchstart', unlockOnFirstInteraction);
+        
+            document.addEventListener('DOMContentLoaded', tryAutoplay);
+        
+            function unlockOnFirstInteraction() {
+              audio.play().catch(()=>{});
+              document.removeEventListener('click', unlockOnFirstInteraction);
+              document.removeEventListener('touchstart', unlockOnFirstInteraction);
+            }
+            document.addEventListener('click', unlockOnFirstInteraction);
+            document.addEventListener('touchstart', unlockOnFirstInteraction);
         })();
     </script>
     

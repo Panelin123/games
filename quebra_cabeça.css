@@ -378,3 +378,19 @@ h3 {
 #playFallback:active {
     transform: scale(0.98);
 }
+
+/* --- Estilo para o Placar Local (Nome do Usuário e High Score) --- */
+.score-display, .timer-display {
+    text-align: center;
+    font-family: "Press Start 2P", monospace;
+    font-size: 0.8em;
+    padding: 10px 0;
+    margin: 10px 0;
+    color: #00ffcc; /* Cor neon do tema arcade */
+}
+
+.timer-display {
+    color: #4cc5e0; /* Cor diferente para o timer */
+    font-size: 0.9em;
+    border-bottom: 1px solid rgba(0, 204, 170, 0.2);
+}

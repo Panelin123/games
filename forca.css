@@ -203,3 +203,13 @@ button:hover {
 #playFallback:active {
   transform: scale(0.98);
 }
+
+/* --- Estilo para o Placar Local (Nome do Usuário e High Score) --- */
+#placar-local {
+  /* Garante que o texto seja legível e centralizado */
+  text-align: center;
+  font-family: "Press Start 2P", monospace;
+  color: #00ffcc; /* Cor neon do tema arcade */
+  padding: 10px;
+  border-bottom: 1px solid rgba(0, 255, 204, 0.2);
+}
