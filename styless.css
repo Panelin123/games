@@ -11,35 +11,17 @@ body {
     min-height: 100vh;
     overflow-x: hidden;
     background: url('img/fundo3.jpg') no-repeat center center fixed;
-    color: black; /* 🔹 Texto padrão fora do header fica preto */
+    color: black; /* Texto padrão fora do header fica preto */
 }
 body *:not(.header *):not(header *) {
-    color: rgb(139, 137, 137) !important;
+    color: rgb(145, 80, 80) !important;
 }
 
 .container {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-
 }
-
-.menu-btn {
-    background-color: #007BFF; /* azul sólido */
-    color: white; /* texto branco */
-    font-family: "Press Start 2P", monospace;
-    font-size: 1.2em;
-    padding: 15px 30px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    margin: 20px 10px;
-    position: fixed;
-    bottom: 20px;
-    left: 20px;
-    z-index: 1001;
-}
-
 
 .header {
     background-color: rgba(30, 90, 255, 1);
@@ -49,7 +31,6 @@ body *:not(.header *):not(header *) {
     position: sticky;
     top: 0;
     z-index: 1000;
-    border-bottom: 3px solid #667eea;
 }
 
 .header h1 {
@@ -61,7 +42,7 @@ body *:not(.header *):not(header *) {
 }
 
 .header * {
-    color: white; /* 🔹 Garante que tudo no header continue branco */
+    color: white; /* Garante que tudo no header continue branco */
 }
 
 .info {
@@ -189,8 +170,7 @@ body *:not(.header *):not(header *) {
 }
 
 .btn {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
+    color: rgba(30, 90, 255, 1);
     border: none;
     padding: 18px 50px;
     font-size: 1.3em;
@@ -204,7 +184,7 @@ body *:not(.header *):not(header *) {
 
 .btn:hover {
     transform: translateY(-5px);
-    box-shadow: 0 12px 30px rgba(102, 126, 234, 0.5);
+    color-scheme: rgba(30, 90, 255, 1) ;
 }
 
 .btn:active {
@@ -285,6 +265,7 @@ canvas {
     font-size: 1.3em;
 }
 
+/* Responsividade */
 @media (max-width: 1400px) {
     canvas {
         width: 500px;
@@ -392,4 +373,36 @@ canvas {
     .btn-dificuldade .titulo {
         font-size: 1.2em;
     }
+}
+
+/* Botão Menu harmonizado */
+.menu-btn {
+    background-color: #667eea; /* Azul principal do tema */
+    color: white;
+    font-family: "Press Start 2P", monospace;
+    font-size: 1.2em;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    margin: 20px 10px;
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 1001;
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+    transition: all 0.3s ease;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
+
+.menu-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(102, 126, 234, 0.5);
+    background-color: #5a6ddf;
+}
+
+.menu-btn:active {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.5);
+    background-color: #5565d1;
 }
