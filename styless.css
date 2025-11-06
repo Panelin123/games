@@ -11,7 +11,10 @@ body {
     min-height: 100vh;
     overflow-x: hidden;
     background: url('img/fundo3.jpg') no-repeat center center fixed;
-    color: #2c1a0a; /* marrom escuro para contraste */
+    color: black; /* 🔹 Texto padrão fora do header fica preto */
+}
+body *:not(.header *):not(header *) {
+    color: rgb(139, 137, 137) !important;
 }
 
 .container {
@@ -40,9 +43,8 @@ body {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-/* 🔹 Caso existam outros textos dentro do header (como links ou spans) */
 .header * {
-    color: white;
+    color: white; /* 🔹 Garante que tudo no header continue branco */
 }
 
 .info {
