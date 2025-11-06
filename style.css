@@ -1,7 +1,6 @@
-/*
-  --- VARIÁVEIS DE CORES ---
-  Melhora a manutenção do código
-*/
+
+
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 :root {
   --color-dark: #1a0033; /* Roxo Escuro */
   --color-primary: #00ffcc; /* Ciano/Verde Neon (Destaque) */
@@ -112,15 +111,15 @@ Refatorado para DRY (Don't Repeat Yourself)
 }
 
 .buttons-jogo4 {
-  margin-top: -100px; 
-  margin-left: 1125px;
+  margin-top: -50px;  /* move mais para cima */
+  margin-left: 1430px;  /* move mais para a esquerda */
 }
 
 .btn {
   background-color: var(--color-button-normal);
   font-family: var(--font-arcade);
   color: var(--color-dark);
-  font-size: 0.5em;
+  font-size: 0.8em;
   padding: 8px 12px;
   border: none;
   border-radius: 8px;
@@ -131,11 +130,13 @@ Refatorado para DRY (Don't Repeat Yourself)
   justify-content: center;
   text-decoration: none;
   box-shadow: 2px 2px 8px #000;
-  width: 140px;
-  height: 60px;
+  width: 200px;  /* antes 140px */
+  height: 80px;
   box-sizing: border-box;
   text-align: center;
+  margin-top: -80px;  /* move mais para cima */
 }
+
 
 .btn:hover {
   background-color: var(--color-button-hover);
@@ -215,19 +216,20 @@ Refatorado para DRY (Don't Repeat Yourself)
 /* Container do usuário e botão de logout ao lado da tabela, logo abaixo do placar */
 #user-info {
   display: flex;
-  top: 10px;
-  flex-direction: column; /* Coloca usuário e botão na coluna */
-  align-items: flex-end; /* Alinha à direita */
-  gap: 10px; /* Espaçamento entre usuário e botão */
+  top: 10px; /* distância do topo da tela */
+  right: 20px; /* joga para o canto direito */
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
   position: fixed;
-  left: 600px; /* Posicionado à direita da tela */
-  padding: 10px;
-  background-color: rgba(0, 0, 0, 0.5); 
-  border: 2px solid var(--color-primary); 
-  border-radius: 8px; 
-  box-shadow: 0 0 10px rgba(0,0,0,0.5); 
+  padding: 5px;
+  background-color: rgba(0, 0, 0, 0.5);
+  border: 2px solid var(--color-primary);
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
   z-index: 100;
 }
+
 
 /* Estilo do usuário */
 #user-display {
@@ -260,4 +262,10 @@ Refatorado para DRY (Don't Repeat Yourself)
   background-color: #702098;
   color: #fff;
   transform: scale(1.05);
+}
+
+.btn-7erros {
+  position: relative;
+  top: -120px;   /* Move o botão para cima (ajuste o valor conforme a altura desejada) */
+  left: -840px;     /* Pode mover para a esquerda ou direita se quiser alinhar */
 }

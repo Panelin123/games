@@ -24,6 +24,23 @@ body *:not(.header *):not(header *) {
 
 }
 
+.menu-btn {
+    background-color: #007BFF; /* azul sólido */
+    color: white; /* texto branco */
+    font-family: "Press Start 2P", monospace;
+    font-size: 1.2em;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    margin: 20px 10px;
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 1001;
+}
+
+
 .header {
     background-color: rgba(30, 90, 255, 1);
     backdrop-filter: blur(10px);
