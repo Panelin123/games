@@ -1,5 +1,3 @@
-
-
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 :root {
   --color-dark: #1a0033; /* Roxo Escuro */
@@ -266,6 +264,6 @@ Refatorado para DRY (Don't Repeat Yourself)
 
 .btn-7erros {
   position: relative;
-  top: -120px;   /* Move o botão para cima (ajuste o valor conforme a altura desejada) */
-  left: -840px;     /* Pode mover para a esquerda ou direita se quiser alinhar */
+  top: 22.5px;   /* Move o botão para cima (ajuste o valor conforme a altura desejada) */
+  left: 280px;     /* Pode mover para a esquerda ou direita se quiser alinhar */
 }

@@ -1,4 +1,3 @@
-html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -9,6 +8,21 @@ html
 </head>
 <body>
     <div id="gameArea">
+        <!-- Menu de Dificuldade -->
+        <div id="menuDificuldade">
+            <h1>🚀 Caça às Estrelas 🚀</h1>
+            <p>Escolha a dificuldade:</p>
+            <button class="difficulty-btn" data-difficulty="facil">Fácil</button>
+            <button class="difficulty-btn" data-difficulty="medio">Médio</button>
+            <button class="difficulty-btn" data-difficulty="dificil">Difícil</button>
+        </div>
+
+        <!-- Contador -->
+        <div id="contador">
+            <h2 id="contadorNumero">3</h2>
+        </div>
+
+        <!-- Interface do Jogo -->
         <div id="score">⭐ 0</div>
         <div id="lives">❤️ 3</div>
         
@@ -25,10 +39,12 @@ html
             </div>
         </div>
 
+        <!-- Tela de Game Over -->
         <div id="gameOver">
             <h2>Fim de Jogo!</h2>
             <p id="finalScore"></p>
             <button id="restartBtn">Jogar Novamente</button>
+            <button id="menuBtn">Menu Principal</button>
         </div>
     </div>
 
