@@ -1,3 +1,30 @@
+// Funções para o sistema de placar
+function getCurrentUser() {
+    return sessionStorage.getItem('currentUserInitials');
+}
+
+function updateTotalScore(gameScore) {
+    const currentUser = getCurrentUser();
+    if (!currentUser) return;
+
+    const scoreKeyTotal = 'arcadeTotalScores';
+    const scores = JSON.parse(localStorage.getItem(scoreKeyTotal) || '[]');
+    
+    // Encontra o usuário atual
+    const userIndex = scores.findIndex(entry => entry.user === currentUser);
+    
+    if (userIndex !== -1) {
+        // Atualiza a pontuação total (soma a nova pontuação)
+        scores[userIndex].score += gameScore;
+    } else {
+        // Se não encontrou, adiciona novo usuário
+        scores.push({ user: currentUser, score: gameScore });
+    }
+    
+    localStorage.setItem(scoreKeyTotal, JSON.stringify(scores));
+    console.log(`Pontuação atualizada: ${currentUser} +${gameScore} pontos`);
+}
+
 // Variáveis globais
 let dificuldadeAtual = '';
 let errosEncontrados = 0;
@@ -70,7 +97,23 @@ document.getElementById('btn-proxima').addEventListener('click', proximaDificuld
 document.getElementById('btn-menu').addEventListener('click', voltarMenu);
 canvas2.addEventListener('click', verificarClique);
 
+// Verificar se usuário está logado ao carregar a página
+document.addEventListener('DOMContentLoaded', function() {
+    const currentUser = getCurrentUser();
+    if (!currentUser) {
+        alert('⚠️ Você precisa estar logado para salvar sua pontuação!\nVolte ao menu principal para registrar suas iniciais.');
+    }
+});
+
 function iniciarJogo(dificuldade) {
+    // Verificar se usuário está logado
+    const currentUser = getCurrentUser();
+    if (!currentUser) {
+        alert('❌ Você precisa estar logado para jogar!\nVolte ao menu principal para registrar suas iniciais.');
+        voltarMenu();
+        return;
+    }
+    
     dificuldadeAtual = dificuldade;
     telaInicio.style.display = 'none';
     jogo.style.display = 'block';
@@ -209,7 +252,7 @@ function atualizarTimer() {
 }
 
 function atualizarInfo() {
-    document.getElementById('erros').textContent = errosEncontrados;
+    document.getElementById('erros').textContent = `${errosEncontrados}/7`;
     document.getElementById('pontuacao').textContent = pontuacaoTotal;
 }
 
@@ -245,6 +288,11 @@ function finalizarFase() {
         btnProxima.textContent = 'Jogar Difícil';
     } else {
         btnProxima.style.display = 'none';
+        // 👇 SALVAR PONTUAÇÃO APÓS COMPLETAR TODAS AS FASES
+        if (pontuacaoTotal > 0) {
+            updateTotalScore(pontuacaoTotal);
+            alert(`🏆 Pontuação final de ${pontuacaoTotal} pontos salva no placar!`);
+        }
     }
 }
 
@@ -258,6 +306,12 @@ function proximaDificuldade() {
 }
 
 function voltarMenu() {
+    // 👇 SALVAR PONTUAÇÃO SE O JOGADOR VOLTAR AO MENU ANTES DE TERMINAR
+    if (pontuacaoTotal > 0 && dificuldadeAtual !== '') {
+        updateTotalScore(pontuacaoTotal);
+        alert(`🏆 Pontuação de ${pontuacaoTotal} pontos salva no placar!`);
+    }
+    
     telaResultado.style.display = 'none';
     telaInicio.style.display = 'flex';
     errosEncontrados = 0;
@@ -270,5 +324,5 @@ function voltarMenu() {
     Object.keys(fases).forEach(key => {
         fases[key].encontrados = [];
     });
+    window.location.href = 'menu.html';
 }
-

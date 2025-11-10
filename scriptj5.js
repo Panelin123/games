@@ -21,6 +21,33 @@ let obstacleChance = 0.3;
 let itemInterval;
 let updateInterval;
 
+// Funções para o sistema de placar
+function getCurrentUser() {
+    return sessionStorage.getItem('currentUserInitials');
+}
+
+function updateTotalScore(gameScore) {
+    const currentUser = getCurrentUser();
+    if (!currentUser) return;
+
+    const scoreKeyTotal = 'arcadeTotalScores';
+    const scores = JSON.parse(localStorage.getItem(scoreKeyTotal) || '[]');
+    
+    // Encontra o usuário atual
+    const userIndex = scores.findIndex(entry => entry.user === currentUser);
+    
+    if (userIndex !== -1) {
+        // Atualiza a pontuação total (soma a nova pontuação)
+        scores[userIndex].score += gameScore;
+    } else {
+        // Se não encontrou, adiciona novo usuário
+        scores.push({ user: currentUser, score: gameScore });
+    }
+    
+    localStorage.setItem(scoreKeyTotal, JSON.stringify(scores));
+    console.log(`Pontuação atualizada: ${currentUser} +${gameScore} pontos`);
+}
+
 // Configurações de dificuldade
 const difficultySettings = {
     facil: {
@@ -28,21 +55,24 @@ const difficultySettings = {
         spawnRate: 1800,
         obstacleChance: 0.2,
         poisonChance: 0,
-        speedIncrease: 0.05
+        speedIncrease: 0.05,
+        initialLives: 3
     },
     medio: {
         speed: 2,
         spawnRate: 1500,
         obstacleChance: 0.3,
         poisonChance: 0,
-        speedIncrease: 0.08
+        speedIncrease: 0.08,
+        initialLives: 3
     },
     dificil: {
         speed: 2.5,
         spawnRate: 1200,
         obstacleChance: 0.35,
         poisonChance: 0.15,
-        speedIncrease: 0.1
+        speedIncrease: 0.1,
+        initialLives: 5
     }
 };
 
@@ -99,6 +129,11 @@ function startGame() {
     scoreDisplay.style.display = 'block';
     livesDisplay.style.display = 'block';
     
+    // Usar vidas iniciais baseadas na dificuldade
+    const settings = difficultySettings[difficulty];
+    lives = settings.initialLives;
+    livesDisplay.innerHTML = '<img src="img/vida.png" style="width:28px; height:28px; vertical-align: middle;"> ' + lives;
+    
     itemInterval = setInterval(createItem, spawnRate);
     updateInterval = setInterval(updateItems, 20);
 }
@@ -147,17 +182,26 @@ function createItem() {
     if (rand < obstacleChance) {
         // Meteoro (obstáculo)
         item.className = 'obstacle';
-        item.textContent = '☄️';
+        item.style.backgroundImage = "url('img/meteoro.png')";
+        item.style.backgroundSize = 'contain';
+        item.style.backgroundRepeat = 'no-repeat';
+        item.style.backgroundPosition = 'center';
         item.dataset.type = 'obstacle';
     } else if (difficulty === 'dificil' && rand < obstacleChance + settings.poisonChance) {
-        // Item venenoso (só no difícil)
+        // Item venenoso (alienígena) - só no difícil
         item.className = 'poison';
-        item.textContent = '☠️';
+        item.style.backgroundImage = "url('img/alienigena.png')";
+        item.style.backgroundSize = 'contain';
+        item.style.backgroundRepeat = 'no-repeat';
+        item.style.backgroundPosition = 'center';
         item.dataset.type = 'poison';
     } else {
         // Estrela coletável
         item.className = 'collectible-star';
-        item.textContent = '⭐';
+        item.style.backgroundImage = "url('img/estrela.png')";
+        item.style.backgroundSize = 'contain';
+        item.style.backgroundRepeat = 'no-repeat';
+        item.style.backgroundPosition = 'center';
         item.dataset.type = 'star';
     }
     
@@ -182,16 +226,17 @@ function updateItems() {
         
         const itemRect = item.element.getBoundingClientRect();
        
-        // Detectar colisão
+        // COLISÃO MAIS PRECISA - só dano se encostar no foguete
         if (
-            itemRect.bottom > rocketRect.top &&
-            itemRect.top < rocketRect.bottom &&
-            itemRect.right > rocketRect.left &&
-            itemRect.left < rocketRect.right
+            itemRect.bottom > rocketRect.top + 20 && // Margem superior
+            itemRect.top < rocketRect.bottom - 20 && // Margem inferior  
+            itemRect.right > rocketRect.left + 30 && // Margem esquerda
+            itemRect.left < rocketRect.right - 30     // Margem direita
         ) {
             if (item.type === 'obstacle' || item.type === 'poison') {
                 lives--;
-                livesDisplay.textContent = '❤️ ' + lives;
+                // Vidas com imagem de coração
+                livesDisplay.innerHTML = '<img src="img/vida.png" style="width:28px; height:28px; vertical-align: middle;"> ' + lives;
                 createExplosion(itemRect.left, itemRect.top);
                 
                 if (lives <= 0) {
@@ -199,7 +244,8 @@ function updateItems() {
                 }
             } else if (item.type === 'star') {
                 score++;
-                scoreDisplay.textContent = '⭐ ' + score;
+                // Score com imagem de estrela
+                scoreDisplay.innerHTML = '<img src="img/estrela.png" style="width:28px; height:28px; vertical-align: middle;"> ' + score;
                 
                 // Aumentar dificuldade progressivamente
                 if (score % 10 === 0) {
@@ -222,16 +268,16 @@ function updateItems() {
 // Aumentar dificuldade progressivamente
 function increaseDifficulty() {
     const settings = difficultySettings[difficulty];
-    gameSpeed += settings.speedIncrease;
+    gameSpeed += settings.speedIncrease * 2; // Acelera o DOBRO!
     
     // Aumentar chance de obstáculos gradualmente
-    if (obstacleChance < 0.5) {
-        obstacleChance += 0.02;
+    if (obstacleChance < 0.6) {
+        obstacleChance += 0.03;
     }
     
-    // Diminuir tempo entre spawns
-    if (spawnRate > 800) {
-        spawnRate -= 50;
+    // Diminuir tempo entre spawns mais rapidamente
+    if (spawnRate > 600) {
+        spawnRate -= 80;
         clearInterval(itemInterval);
         itemInterval = setInterval(createItem, spawnRate);
     }
@@ -271,6 +317,11 @@ function endGame() {
         rocket.style.display = 'none';
         document.getElementById('finalScore').textContent = 'Você coletou ' + score + ' estrelas!';
         gameOverDiv.style.display = 'block';
+        
+        // SALVAR A PONTUAÇÃO NO SISTEMA DE RECORDES
+        if (score > 0) {
+            updateTotalScore(score);
+        }
     }, 600);
 }
 
@@ -283,13 +334,12 @@ restartBtn.addEventListener('click', () => {
 // Voltar ao menu
 menuBtn.addEventListener('click', () => {
     resetGame();
-    menuDificuldade.style.display = 'block';
+    window.location.href = 'menu.html'; // 👈 Volta para o menu principal
 });
 
 // Resetar o jogo
 function resetGame() {
     score = 0;
-    lives = 3;
     rocketPos = 50;
     gameRunning = false;
     
@@ -298,14 +348,23 @@ function resetGame() {
     gameSpeed = settings.speed;
     spawnRate = settings.spawnRate;
     obstacleChance = settings.obstacleChance;
+    lives = settings.initialLives;
     
-    scoreDisplay.textContent = '⭐ 0';
-    livesDisplay.textContent = '❤️ 3';
+    // Score inicial com imagem de estrela
+    scoreDisplay.innerHTML = '<img src="img/estrela.png" style="width:28px; height:28px; vertical-align: middle;"> 0';
+    // Vidas iniciais baseadas na dificuldade
+    livesDisplay.innerHTML = '<img src="img/vida.png" style="width:28px; height:28px; vertical-align: middle;"> ' + lives;
     rocket.style.left = '50%';
     rocket.style.display = 'none';
     gameOverDiv.style.display = 'none';
     scoreDisplay.style.display = 'none';
     livesDisplay.style.display = 'none';
+    
+    // VERIFICAR SE USUÁRIO ESTÁ LOGADO
+    const currentUser = getCurrentUser();
+    if (!currentUser) {
+        alert('⚠️ Você precisa estar logado para salvar sua pontuação!\nVolte ao menu principal para registrar suas iniciais.');
+    }
     
     // Limpar todos os itens
     items.forEach(item => item.element.remove());

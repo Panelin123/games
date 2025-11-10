@@ -94,17 +94,17 @@ body {
 .buttons-jogo4 {
   display: flex;
   flex-wrap: wrap;
-  gap: 35px; /* Espaço entre botões */
+  gap: 65px; /* Espaço entre botões */
 }
 
 .buttons {
-  margin-top: -190px;
-  margin-left: 0;
+  margin-top: -100px;
+  margin-left: 35px;
 }
 
 .buttons-jogo4 {
-  margin-top: -5px;
-  margin-left: 1430px;
+  margin-top: -20px;
+  margin-left: 1500px; /* move mais para a direita */
 }
 
 .btn {
@@ -136,13 +136,14 @@ body {
   box-shadow: 0 0 12px var(--color-secondary);
 }
 
-/* Mantém os botões 7 Erros e Jogo5 alinhados lado a lado */
 .btn-7erros,
 .btn-jogo5 {
   position: relative;
-  top: 65px;   /* Move para baixo */
-  left: 300px;  /* Move para a direita */
+  top: 65px;
+  left: 180px;
 }
+
+
 /* --- 4. MASCOTE E BALÃO DE FALA --- */
 .mascote-container {
   position: fixed;

@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 * {
     margin: 0;
     padding: 0;
@@ -5,8 +6,8 @@
 }
 
 body {
-    background: linear-gradient(to bottom, #0a0e27 0%, #1a1a3e 50%, #2d1b4e 100%);
-    font-family: 'Comic Sans MS', cursive;
+    background-image: url(img/espaço.jpg);
+    font-family: 'Press Start 2P', monospace;
     overflow: hidden;
     height: 100vh;
 }
@@ -66,7 +67,7 @@ body {
     font-size: 28px;
     border-radius: 15px;
     cursor: pointer;
-    font-family: 'Comic Sans MS', cursive;
+    font-family: 'Press Start 2P', monospace;
     margin: 10px;
     transition: all 0.3s;
     display: block;
@@ -120,57 +121,23 @@ body {
     bottom: 50px;
     left: 50%;
     transform: translateX(-50%);
-    width: 60px;
-    height: 80px;
+    width: 240px;
+    height: 130px;
+    background-image: url('img/foguete.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
     transition: left 0.1s;
-}
-
-.rocket-body {
-    width: 40px;
-    height: 50px;
-    background: linear-gradient(to bottom, #e74c3c 0%, #c0392b 100%);
-    margin: 0 auto;
-    border-radius: 20px 20px 0 0;
-    position: relative;
-}
-
-.rocket-window {
-    width: 20px;
-    height: 20px;
-    background: #3498db;
-    border-radius: 50%;
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    border: 3px solid #2c3e50;
-}
-
-.rocket-wing {
-    position: absolute;
-    width: 0;
-    height: 0;
-    border-style: solid;
-}
-
-.rocket-wing.left {
-    border-width: 0 0 25px 20px;
-    border-color: transparent transparent #e67e22 transparent;
-    left: -15px;
-    bottom: 0;
-}
-
-.rocket-wing.right {
-    border-width: 0 20px 25px 0;
-    border-color: transparent #e67e22 transparent transparent;
-    right: -15px;
-    bottom: 0;
+    z-index: 10;
 }
 
 .rocket-fire {
-    position: relative;
+    position: absolute;
+    bottom: -5px; /* 👈 MUDEI AQUI - fogo mais abaixo */
+    left: 50%;
+    transform: translateX(-50%);
     width: 30px;
     height: 35px;
-    margin: 0 auto;
 }
 
 .flame {
@@ -210,11 +177,26 @@ body {
     }
 }
 
+@keyframes fire {
+    0% { 
+        transform: translateX(-50%) scaleY(1) scaleX(1);
+        opacity: 1;
+    }
+    100% { 
+        transform: translateX(-50%) scaleY(1.4) scaleX(0.9);
+        opacity: 0.8;
+    }
+}
+
 .collectible-star {
     position: absolute;
-    font-size: 40px;
+    width: 60px;
+    height: 60px;
     animation: float 3s ease-in-out infinite;
     cursor: pointer;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 @keyframes float {
@@ -224,26 +206,67 @@ body {
 
 .obstacle {
     position: absolute;
-    font-size: 45px;
+    width: 85px;
+    height: 85px;
     animation: spin 4s linear infinite;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .poison {
     position: absolute;
-    font-size: 40px;
-    animation: wobble 2s ease-in-out infinite;
+    width: 100px;  /* 👈 REDUZI de 140px para 100px */
+    height: 100px; /* 👈 REDUZI de 140px para 100px */
+    animation: alien-float 3s ease-in-out infinite;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    filter: drop-shadow(0 0 15px #00ff00);
+    z-index: 10;
 }
 
-@keyframes spin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
+@keyframes alien-float {
+    0%, 100% { 
+        transform: translateY(0px) rotate(0deg);
+        filter: drop-shadow(0 0 15px #00ff00);
+    }
+    25% { 
+        transform: translateY(-10px) rotate(5deg);
+        filter: drop-shadow(0 0 20px #00ff00) hue-rotate(90deg);
+    }
+    50% { 
+        transform: translateY(-5px) rotate(0deg);
+        filter: drop-shadow(0 0 25px #00ff00);
+    }
+    75% { 
+        transform: translateY(-10px) rotate(-5deg);
+        filter: drop-shadow(0 0 20px #00ff00) hue-rotate(180deg);
+    }
 }
 
-@keyframes wobble {
-    0%, 100% { transform: translateX(0) rotate(-10deg); }
-    25% { transform: translateX(-5px) rotate(10deg); }
-    50% { transform: translateX(0) rotate(-10deg); }
-    75% { transform: translateX(5px) rotate(10deg); }
+.poison::before {
+    content: '';
+    position: absolute;
+    top: -10px; /* 👈 Ajustei o brilho para o tamanho menor */
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    background: radial-gradient(circle, rgba(0,255,0,0.4) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: alien-glow 2s ease-in-out infinite alternate;
+    z-index: -1;
+}
+
+@keyframes alien-glow {
+    from { 
+        opacity: 0.3; 
+        transform: scale(0.8); 
+    }
+    to { 
+        opacity: 0.6; 
+        transform: scale(1.2); 
+    }
 }
 
 #score {
@@ -263,11 +286,17 @@ body {
     top: 20px;
     right: 20px;
     color: #e74c3c;
-    font-size: 28px;
+    font-size: 30px;
     font-weight: bold;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
     z-index: 100;
     display: none;
+}
+
+#score, #lives {
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 #gameOver {
@@ -303,7 +332,7 @@ body {
     font-size: 24px;
     border-radius: 10px;
     cursor: pointer;
-    font-family: 'Comic Sans MS', cursive;
+    font-family: 'Press Start 2P', monospace;
     transition: all 0.3s;
     margin: 10px;
 }
@@ -327,6 +356,7 @@ body {
     font-size: 60px;
     animation: explode 0.5s ease-out;
     pointer-events: none;
+    z-index: 5;
 }
 
 @keyframes explode {
