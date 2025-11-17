@@ -99,12 +99,13 @@ body {
 
 .buttons {
   margin-top: -100px;
-  margin-left: 35px;
+  margin-left: 30px; /* Movido um pouco mais para a esquerda (era 100px) */
 }
 
+/* Botão Cobrinha — movido mais para cima */
 .buttons-jogo4 {
-  margin-top: -20px;
-  margin-left: 1500px; /* move mais para a direita */
+  margin-top: -120px; /* Movido mais para cima (era -40px) */
+  margin-left: 1150px;
 }
 
 .btn {
@@ -139,10 +140,10 @@ body {
 .btn-7erros,
 .btn-jogo5 {
   position: relative;
-  top: 65px;
-  left: 180px;
+  top: 0;
+  left: -125px;   /* Movido um pouco mais para a esquerda (era -15px) */
+  margin-top: 10px;
 }
-
 
 /* --- 4. MASCOTE E BALÃO DE FALA --- */
 .mascote-container {
